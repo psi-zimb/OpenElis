@@ -1908,6 +1908,24 @@
     <form-property name="selectedIDs" type="java.lang.String[]"/> 
   </form-bean>
   
+  <!-- TYPE OF RESULT STATUS FORM -->
+  <form-bean name="typeOfResultStatusForm" type="us.mn.state.health.lims.common.action.BaseActionForm">
+    <form-property name="id" type="java.lang.String" initial=""/> 
+    <form-property name="name" type="java.lang.String" initial=""/>
+    <form-property name="description" type="java.lang.String" initial=""/>
+    <form-property name="statusType" type="java.lang.String" initial=""/>   
+    <form-property name="isActive" type="java.lang.String" initial=""/> 
+    <form-property name="isResultRequired" type="java.lang.String" initial=""/> 
+    <form-property name="isApprovalRequired" type="java.lang.String" initial=""/>
+	<form-property name="lastupdated" type="java.sql.Timestamp" initial=""/>	
+  </form-bean> 
+  <form-bean name="typeOfResultStatusMenuForm" type="us.mn.state.health.lims.common.action.BaseActionForm">
+    <form-property name="menuList" type="java.util.List"/> 
+    <form-property name="selectedIDs" type="java.lang.String[]"/> 
+  </form-bean>
+  
+  
+  
   <form-bean name="unitOfMeasureForm" type="us.mn.state.health.lims.common.action.BaseActionForm">
     <form-property name="id" type="java.lang.String" initial=""/> 
     <form-property name="unitOfMeasureName" type="java.lang.String" initial=""/> 
@@ -4511,7 +4529,18 @@
           <forward name="success" path="masterListsPageDefinition"/> 
           <forward name="fail" path="masterListsPageDefinition"/>
           <forward name="close" path="masterListsPageDefinition"/> 
-       </action>   
+       </action>  
+       
+ <!--TYPE_OF_RESULT_STATUS-->       
+       <action path="/TypeOfResultStatus" name="typeOfResultStatusForm" type="us.mn.state.health.lims.typeofresultstatus.action.TypeOfResultStatusAction" validate="false">
+          <forward name="success" path="typeOfResultStatusDefinition"/> 
+          <forward name="fail" path="masterListsPageDefinition"/> 
+       </action> 
+       
+        <action path="/TypeOfResultStatusMenu" name="typeOfResultStatusMenuForm" type="us.mn.state.health.lims.typeofresultstatus.action.TypeOfResultStatusMenuAction">
+          <forward name="success" path="masterListsPageDefinition"/> 
+          <forward name="fail" path="/MasterListsPage.do"/> 
+       </action>
        
        
 <!--UNIT_OF_MEASURE-->       

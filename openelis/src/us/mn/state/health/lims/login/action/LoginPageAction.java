@@ -22,19 +22,22 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
+import org.bahmni.feed.openelis.feed.event.EncounterFeedWorker;
 
 import us.mn.state.health.lims.common.util.ConfigurationProperties;
 import us.mn.state.health.lims.common.util.ConfigurationProperties.Property;
 import us.mn.state.health.lims.common.util.SystemConfiguration;
+import org.apache.log4j.Logger;
 
 /**
  * @author Hung Nguyen (Hung.Nguyen@health.state.mn.us)
  */
 public class LoginPageAction extends LoginBaseAction {
+	private static Logger logger = Logger.getLogger(LoginPageAction.class);
 
 	protected ActionForward performAction(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-
+		logger.debug("Login Action");
 		String forward = FWD_SUCCESS;
 
 		cleanUpSession(request);

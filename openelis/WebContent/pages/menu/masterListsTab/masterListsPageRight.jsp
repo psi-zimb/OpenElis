@@ -185,6 +185,9 @@ if (request.getAttribute("menuDefinition") != null) {
 <logic:equal name="menuDef" value="default">
 <tiles:insert attribute="right"/>
 </logic:equal>
+<logic:equal name="menuDef" value="TypeOfResultStatusMenuDefinition">
+  <tiles:insert attribute="rightTypeOfResultStatus" />
+</logic:equal>
 </td>
 </tr>
 </table>

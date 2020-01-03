@@ -61,12 +61,12 @@
         </copy>
     </target>
 
-    <taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
+    <taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask">
         <classpath refid="build.lib"/>
     </taskdef>
 
     <target name="jasper.compile" depends="java.compile">
-        <jrc 
+        <jrc
                 srcdir="${web}/WEB-INF/reports"
                 destdir="${web}/WEB-INF/reports"
                 tempdir="${web}/WEB-INF/reports"
@@ -83,9 +83,7 @@
         <copy todir="${target}">
             <fileset dir="${src}" includes="**/*.properties"/>
         </copy>
-        <copy tofile="${dist}/LICENSE">
-            <fileset dir="${src}" file="LICENSE"/>
-        </copy>
+
         <propertyMerge
                 inputpropertyfile="${target}/MessageResources.properties"
                 mergepropertyfile="${target}/BahmniMessageResources.properties"
@@ -93,8 +91,7 @@
                 native2ascii="true"/>
         <war destfile="${dist}/openelis.war">
             <classes dir="${target}"/>
-            <fileset dir="${web}"/>
-            <fileset file="${dist}/LICENSE"/>            
+            <fileset dir="${web}"/> 
             <lib dir="${dist}/lib"/>
         </war>
     </target>

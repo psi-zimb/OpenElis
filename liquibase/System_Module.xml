@@ -1138,4 +1138,13 @@
              <column name="has_delete_flag" value="Y"/>
         </insert>
 	  </changeSet>
+	   <insert schemaName="clinlims" tableName="system_module">
+             <column name="id" valueNumeric=" nextval( 'type_of_result_status_seq' )  "/>
+             <column name="name" value="TypeOfResultStatus"/>
+             <column name="description" value="TypeOfResultStatus"/>
+             <column name="has_select_flag" value="Y"/>
+             <column name="has_add_flag" value="Y"/>
+             <column name="has_update_flag" value="Y"  />
+             <column name="has_delete_flag" value="Y"/>
+    </insert>
 </databaseChangeLog>

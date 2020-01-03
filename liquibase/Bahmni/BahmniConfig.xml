@@ -1716,4 +1716,34 @@
             ALTER TABLE sample_source ALTER COLUMN name TYPE character varying(50);
         </sql>
     </changeSet>
+    <changeSet author="buvaneswari" id="20">
+	<comment>Create a new table to store types of result status - Change Request</comment>
+	<createSequence sequenceName="type_of_result_status_seq"
+		minValue="0" startValue="1" />
+	<createTable schemaName="clinlims"
+		tableName="type_of_result_status">
+		<column name="id" type="int">
+			<constraints primaryKeyName="pk_type_of_result_status"
+				primaryKey="true" />
+		</column>
+		<column name="name" type="varchar(50)">
+			<constraints nullable="false" />
+		</column>
+		<column name="description" type="varchar(200)">
+			<constraints nullable="false" />
+		</column>
+		<column name="status_type" type="varchar(20)">
+			<constraints nullable="false" />
+		</column>
+		<column name="is_active" type="boolean"
+			defaultValueBoolean="true" />
+		<column name="is_result_required" type="boolean"
+			defaultValueBoolean="true" />
+		<column name="is_approval_required" type="boolean"
+			defaultValueBoolean="true" />
+		<column name="date_created" type="timestamp"
+			defaultValueDate="CURRENT_TIMESTAMP(6)" />
+		<column name="lastupdated" type="timestamp(6)" />
+	</createTable>
+</changeSet>
 </databaseChangeLog>

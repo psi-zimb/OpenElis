@@ -430,6 +430,13 @@
   </html:link>
 </li>
 <%} %>
+<% if(adminFields.useField(Field.TypeOfResultStatusMenu)){ %>
+<li>
+    <html:link action="/TypeOfResultStatusMenu">
+    <bean:message key="typeofresultstatus.browse.title" />
+  </html:link>
+</li>
+<% } %>
 
 </ul>
 </table>
