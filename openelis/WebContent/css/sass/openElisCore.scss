@@ -12,8 +12,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
   margin: 0;
@@ -22,7 +22,7 @@ time, mark, audio, video {
   font-size: 100%;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
@@ -47,10 +47,10 @@ table {
 @charset "UTF-8";
 @import "compass";
 /*=====================*/
-/* 
+/*
 * OpenELIS Main Stylesheet
 * Main styles used by OpenELIS
-* 
+*
 * Authored by:
 * Clinical Informatics Research Group, University of Washington School of Nursing.
 * http://cirg.washington.edu
@@ -124,7 +124,7 @@ table {
 }
 th {
   color: #555555;
-    @include background-image(linear-gradient(white, #e2e2e2)); 
+    @include background-image(linear-gradient(white, #e2e2e2));
    text-align: left;
   padding:5px  0px 5px 5px ;
 }
@@ -147,10 +147,10 @@ hr{
 hr.hr-style-1 {
     border: 0;
     height: 1px;
-    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
-    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
 }
 input[type="button"],input[type="file"],input[type="submit"],button{
   @include background-image(linear-gradient(white, #eaeaea));
@@ -168,8 +168,8 @@ input[type="button"],input[type="file"],input[type="submit"],button{
   }
   &.primary-btn{
       @include background-image(linear-gradient(#a1d030, #88af28));
-      color:#fff; 
-      border: 1px solid #88af28; 
+      color:#fff;
+      border: 1px solid #88af28;
       &:hover{
         background: #8eb82a;
         border-color: #779b23;
@@ -187,7 +187,7 @@ input[type="button"],input[type="file"],input[type="submit"],button{
     background:#ffffff;
     color:#a1a1a1;
     cursor:auto !important;
-    @include box-shadow(none); 
+    @include box-shadow(none);
   }
  }
 /***** End overrides of default browser styles *****/
@@ -264,7 +264,7 @@ input[type="button"],input[type="file"],input[type="submit"],button{
   padding-right: 10px;
 }
 #training-alert span:after {
-  content: "✧";
+  content: "";
   padding-left: 10px;
 }
 #user-info {
@@ -336,7 +336,7 @@ input[type="button"],input[type="file"],input[type="submit"],button{
 }
 .table-small th {
 	padding: 4px;
-	background-color: #C8DADA; 
+	background-color: #C8DADA;
 	color: #369;
 	font-size: 1.1em
 }
@@ -348,7 +348,7 @@ input[type="button"],input[type="file"],input[type="submit"],button{
 /* Additions for UI to table headers for sorting */
 table .header{
   cursor:pointer;
-  
+
 }
 table .header:after {
   content:"";
@@ -393,7 +393,7 @@ table .headerSortUp:after {
 }
 .oe-report {
   min-width: 840px;
-  margin-left: 10px;	
+  margin-left: 10px;
 }
 .oe-report div {
   margin-bottom: 6px;
@@ -464,7 +464,7 @@ table .headerSortUp:after {
 .alert > div:last-child {
   margin-bottom: 0px
 }
-	
+
 /***** End Styles used in conjunction with Bootstrap *****/
 
 /***** Styles used with DataTables jQuery plug-in *****/
@@ -496,7 +496,7 @@ div.dataTables_info {
 	min-width: 54px /* Needed to keeper audit trail headers on one line. */
 }
 .dataTable td {
-  max-width: 400px;  	
+  max-width: 400px;
 }
 div.dataTables_filter {
   margin-left: 24px;
@@ -518,7 +518,7 @@ div.dataTables_filter {
   background-color: #f2f2f2
 }
 .table-hover tbody tr:hover td,
-.table-hover tbody tr:hover td.sorting_1, 
+.table-hover tbody tr:hover td.sorting_1,
 .table-hover tbody tr:hover th {
   background-color: #e5e5e5;
 }
@@ -553,7 +553,7 @@ div.dataTables_filter {
 }
 .loading-note img {
   float: left;
-  margin-right: 20px;	
+  margin-right: 20px;
 }
 /* Used for disabled fields in validation results. Width to match std input box size. */
 .results-readonly {
@@ -610,7 +610,7 @@ td.InterstitialHead{
   font-weight: bold;
   font-size: 14px;
 }
-td.HeadSeperator{  
+td.HeadSeperator{
   border:1px dotted #cecece;
   font-weight: bold;
   font-size: 14px;
@@ -1098,7 +1098,7 @@ tr.rowTemplate {display: none}
 /* END bugzilla 1895 */
 
 .important-text {
-  color: #FF0000	
+  color: #FF0000
 }
 .indented-important-message {
   margin-left: 10px;
@@ -1120,7 +1120,7 @@ tr.rowTemplate {display: none}
 .oe-form ul { margin:0; padding:0; list-style:none;}
 .oe-form ul ul { overflow:auto}
 .oe-form li { clear: both; padding-bottom: 1em}
-/*.oe-form label { 
+/*.oe-form label {
   width:180px; display:block; float:left; line-height:26px;
 } */
 .inline-more {
@@ -1183,7 +1183,7 @@ p{
 .results-message {
     color: #ffa000;
     font-size:1.3em;
-    padding:5px 0px;      
+    padding:5px 0px;
 }
 .required-message{
   margin-left:20px;
@@ -1245,17 +1245,17 @@ table{
     border-bottom:1px solid #cecece;
     font-weight: bold;
     &:first-child{
-      border-left:1px solid #cecece;  
+      border-left:1px solid #cecece;
     }
     &:last-child{
-     border-right:1px solid #cecece;   
+     border-right:1px solid #cecece;
     }
   }
   textarea{
     width:96%;
   }
   tr.evenRow:hover,tr.oddRow:hover,#searchResultTable tr:hover{
-      background-color: #f5f5f5;  
+      background-color: #f5f5f5;
     }
     .last-child{
       border-right:1px solid #cecece;
@@ -1291,7 +1291,7 @@ table{
       }
     }
 }
-table.administration{ 
+table.administration{
   td{
     vertical-align:top;
 

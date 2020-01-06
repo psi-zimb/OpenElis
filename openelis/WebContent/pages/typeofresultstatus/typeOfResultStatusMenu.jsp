@@ -22,10 +22,10 @@
 	   	  <bean:message key="typeofresultstatus.name"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeoftestresult.description"/>
+	   	  <bean:message key="typeofresultstatus.description"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeoftestresult.statusType"/>
+	   	  <bean:message key="typeofresultstatus.statusType"/>
 	   </th>
   
 	</tr>
