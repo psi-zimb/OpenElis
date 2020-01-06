@@ -27,6 +27,15 @@
 	   <th>
 	   	  <bean:message key="typeofresultstatus.statusType"/>
 	   </th>
+	   <th>
+	   	  <bean:message key="typeofresultstatus.isActive"/>
+	   </th>
+	   <th>
+	   	  <bean:message key="typeofresultstatus.isResultRequired"/>
+	   </th>
+	   <th>
+	   	  <bean:message key="typeofresultstatus.isApprovalRequired"/>
+	   </th>
   
 	</tr>
 	<logic:iterate id="tors" indexId="ctr" name="<%=formName%>" property="menuList" type="us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus">
@@ -47,6 +56,15 @@
 	   </td>
 	   <td class="textcontent">
 	   	  <bean:write name="tors" property="statusType"/>
+	   </td>
+	    <td class="textcontent">
+	   	  <bean:write name="tors" property="isActive"/>
+	   </td>
+	    <td class="textcontent">
+	   	  <bean:write name="tors" property="isResultRequired"/>
+	   </td>
+	    <td class="textcontent">
+	   	  <bean:write name="tors" property="isApprovalRequired"/>
 	   </td>
        </tr>
 	</logic:iterate>
