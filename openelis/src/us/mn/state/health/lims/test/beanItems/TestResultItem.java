@@ -130,6 +130,7 @@ public class TestResultItem implements ResultItem, Serializable{
     private FormFile uploadedFile;
     private String uploadedFileName;
 	private boolean isReferredOutValueChanged = false;
+	private String testResultStatusId = "";
 
     public String getAccessionNumber() {
 		return accessionNumber;
@@ -652,4 +653,13 @@ public class TestResultItem implements ResultItem, Serializable{
         }
         return map.toString();
     }
+    
+	public String getTestResultStatusId() {
+		return testResultStatusId;
+	}
+	
+	public void setTestResultStatusId(String testResultStatusId) {
+		this.testResultStatusId = testResultStatusId;
+	} 
+    
 }

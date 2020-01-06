@@ -37,6 +37,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
+import typeofresultstatus.util.TypeOfResultStatusUtil;
 import us.mn.state.health.lims.common.action.BaseAction;
 import us.mn.state.health.lims.common.util.ConfigurationProperties;
 import us.mn.state.health.lims.common.util.ConfigurationProperties.Property;
@@ -66,6 +67,8 @@ import us.mn.state.health.lims.test.beanItems.TestResultItem;
 import us.mn.state.health.lims.userrole.dao.UserRoleDAO;
 import us.mn.state.health.lims.userrole.daoimpl.UserRoleDAOImpl;
 import us.mn.state.health.lims.test.valueholder.Test;
+import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
+import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
 import us.mn.state.health.lims.test.daoimpl.TestDAOImpl;
 import us.mn.state.health.lims.test.dao.TestDAO;
 
@@ -98,6 +101,9 @@ public class AccessionResultsAction extends BaseAction {
 		PropertyUtils.setProperty(dynaForm, "referralReasons", ReferralUtil.getReferralReasons());
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
 
+		//TYPE_OF_RESULT_STATUS 		
+		PropertyUtils.setProperty(dynaForm, "typeofresultstatus", TypeOfResultStatusUtil.getAllActiveTypeOfResultStatus());
+		
 
 		ResultsPaging paging = new ResultsPaging();
 		String newPage = request.getParameter("page");

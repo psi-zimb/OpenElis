@@ -2,6 +2,7 @@ package us.mn.state.health.lims.typeofresultstatus.daoimpl;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.hibernate.Query;
+
 import us.mn.state.health.lims.audittrail.dao.AuditTrailDAO;
 import us.mn.state.health.lims.audittrail.daoimpl.AuditTrailDAOImpl;
 import us.mn.state.health.lims.common.action.IActionConstants;
@@ -14,6 +15,7 @@ import us.mn.state.health.lims.common.util.SystemConfiguration;
 import us.mn.state.health.lims.hibernate.HibernateUtil;
 import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
 import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
+import us.mn.state.health.lims.common.util.IdValuePair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -360,4 +362,20 @@ public class TypeOfResultStatusDAOImpl extends BaseDAOImpl implements TypeOfResu
 
 		return null;
 	}
+	
+	@Override
+	public List getAllActiveResultStatus() throws LIMSRuntimeException {
+		try {
+			String sql = "from TypeOfResultStatus totr where totr.isActive = 'Y'";
+			Query query = HibernateUtil.getSession().createQuery(sql); 
+			List list = query.list();
+			HibernateUtil.getSession().flush();
+			HibernateUtil.getSession().clear();
+			return list;
+		} catch (Exception e) {
+			LogEvent.logErrorStack("TypeOfResultStatusDAOImpl", "getAllActiveResultStatus()", e);
+			throw new LIMSRuntimeException("Error in TypeOfResultStatus getAllActiveResultStatus()", e);
+		}
+	}  
+	
 }

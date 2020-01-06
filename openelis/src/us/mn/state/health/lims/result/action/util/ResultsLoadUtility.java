@@ -90,6 +90,9 @@ import us.mn.state.health.lims.testreflex.valueholder.TestReflex;
 import us.mn.state.health.lims.testresult.dao.TestResultDAO;
 import us.mn.state.health.lims.testresult.daoimpl.TestResultDAOImpl;
 import us.mn.state.health.lims.testresult.valueholder.TestResult;
+import us.mn.state.health.lims.testresultstatus.valueholder.TestResultStatus;
+import us.mn.state.health.lims.testresultstatus.dao.TestResultStatusDAO;
+import us.mn.state.health.lims.testresultstatus.daoimpl.TestResultStatusDAOImpl;
 import us.mn.state.health.lims.typeofsample.util.TypeOfSampleUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -848,6 +851,10 @@ public class ResultsLoadUtility {
                 }
             }
         }
+        
+        //Result status
+        TestResultStatusDAO trsDAO = new TestResultStatusDAOImpl();
+        TestResultStatus testResultStatus = trsDAO.getTestResultStatusByTestId(test.getId()); 
 
         String uom = "";
         if (!isCD4Conclusion) {
@@ -861,6 +868,7 @@ public class ResultsLoadUtility {
 
         TestResultItem testItem = new TestResultItem();
 
+        testItem.setTestResultStatusId((testResultStatus != null &&  testResultStatus.getTypeOfResultStatus() != null) ? testResultStatus.getTypeOfResultStatus().getId() : null);
         testItem.setAccessionNumber(accessionNumber);
         testItem.setAnalysisId(analysis.getId());
         testItem.setSequenceNumber(sequenceNumber);

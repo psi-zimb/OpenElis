@@ -297,6 +297,8 @@
             resource="us/mn/state/health/lims/samplesource/valueholder/SampleSource.hbm.xml" />
     <mapping
 		resource="us/mn/state/health/lims/typeofresultstatus/valueholder/TypeOfResultStatus.hbm.xml" />
+	<mapping
+		resource="us/mn/state/health/lims/testresultstatus/valueholder/TestResultStatus.hbm.xml" />
 </session-factory>
 
 </hibernate-configuration>

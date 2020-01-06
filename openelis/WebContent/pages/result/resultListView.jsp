@@ -582,6 +582,9 @@ function /*void*/ processTestReflexCD4Success(xhr)
 			<bean:message key="result.test"/>
 		</th>
 		<th width="16px">&nbsp;</th>
+		<th>
+			<bean:message key="test.resultstatus"/>
+		</th>
 		<th width="165px" style="text-align: left">
 			<bean:message key="result.result"/>
 		</th>
@@ -606,7 +609,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
 	<logic:iterate id="testResult" name="<%=formName%>"  property="testResult" indexId="index" type="TestResultItem">
 	<logic:equal name="testResult" property="isGroupSeparator" value="true">
 	<tr>
-		<td colspan="10"><hr/></td>
+		<td colspan="11"><hr/></td>
 	</tr>
 	<tr>
 		<th>
@@ -617,7 +620,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
 			<%=StringUtil.getContextualMessageForKey("resultsentry.accessionNumber")%><br/>
 			<bean:write name="testResult" property="accessionNumber"/>
 		</th>
-		<th colspan="8" />
+		<th colspan="9" />
 	</tr>
 	</logic:equal>
 	<logic:equal name="testResult" property="isGroupSeparator" value="false">
@@ -633,7 +636,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
    <% if( compactHozSpace ){ %>
    <logic:equal  name="testResult" property="showSampleDetails" value="true">
 		<tr class='<%= rowColor %>Head <%= accessionNumber%>' >
-			<td colspan="10" class='InterstitialHead' >
+			<td colspan="11" class='InterstitialHead' >
                 <%=StringUtil.getContextualMessageForKey("result.sample.id")%> : &nbsp;
 				<b><bean:write name="testResult" property="accessionNumber"/> -
 				<bean:write name="testResult" property="sequenceNumber"/></b>
@@ -771,6 +774,22 @@ function /*void*/ processTestReflexCD4Success(xhr)
 		<logic:equal name="testResult" property="nonconforming" value="true">
 			<img src="./images/nonconforming.gif" />
 		</logic:equal>
+		</td>
+		<!-- result status cell -->
+		<td>
+		<select name="<%="testResult[" + index + "].testResultStatusId" %>"
+			        id='<%="testResultStatusId_" + index%>'
+                    class="testResultStatus"
+					 >
+               <option value='0'> 
+                        <bean:message key="test.resultstatus.select" /> 
+                </option> 
+			<logic:iterate id="optionValue" name='<%=formName %>' property="typeofresultstatus" type="IdValuePair" >
+					<option value='<%=optionValue.getId()%>'  <%if(optionValue.getId().equals(testResult.getTestResultStatusId())) out.print("selected='selected'"); %>  >
+							<bean:write name="optionValue" property="value"/>
+					</option>
+			</logic:iterate>
+			</select>
 		</td>
 		<!-- result cell -->
 		<td id='<%="cell_" + index %>' class="ruled">
@@ -986,7 +1005,7 @@ function /*void*/ processTestReflexCD4Success(xhr)
 													<bean:message key="note.note"/>
 													<% } %>
 													:</td>
-		<td colspan="6" align="left" >
+		<td colspan="7" align="left" >
 			<html:textarea styleId='<%="note_" + index %>'
 						   onchange='<%="markUpdated(" + index + ");"%>'
 					   	   name="testResult"

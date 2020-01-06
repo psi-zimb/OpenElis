@@ -19,7 +19,8 @@ import us.mn.state.health.lims.common.dao.BaseDAO;
 import us.mn.state.health.lims.common.exception.LIMSRuntimeException;
 import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
 
-import java.util.List;
+
+import java.util.List; 
 
 /**
  * @author Srivathsala 
@@ -51,4 +52,7 @@ public interface TypeOfResultStatusDAO extends BaseDAO {
 	public TypeOfResultStatus getTypeOfResultStatusByName(String typeOfResultStatusName) throws LIMSRuntimeException;
 
     public TypeOfResultStatus getTypeOfResultStatusById(String resultTypeId) throws LIMSRuntimeException;
-}
+    
+    public List getAllActiveResultStatus() throws LIMSRuntimeException;
+    
+ }
