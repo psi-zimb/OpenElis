@@ -807,7 +807,7 @@ function enableDisableResult(index) {
 				<logic:iterate id="optionValue" name='<%=formName %>'
 					property="typeofresultstatus" type="TypeOfResultStatus">
 					<option value='<%=optionValue.getId()%>'
-						<%if (optionValue.getId().equals(testResult.getTestResultStatusId()))
+						<%if (testResult.getTypeOfResultStatus() != null && optionValue.getId().equals(testResult.getTypeOfResultStatus().getId()))
 				out.print("selected='selected'");%>>
 						<%=optionValue.getName()%>
 					</option>
@@ -832,7 +832,7 @@ function enableDisableResult(index) {
                        class="testResultValue"
 			           style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 			           title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
-					   <%= testResult.isReadOnly() || testResult.isReferredOut() ? "disabled='disabled'" : ""%>
+					   <%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTorsResultRequired() ? "disabled='disabled'" : ""%>
 					   class='<%= (testResult.isReflexGroup() ? "reflexGroup_" + testResult.getReflexParentGroup()  : "")  +  (testResult.isChildReflex() ? " childReflex_" + testResult.getReflexParentGroup() : "") %> '
 					   onchange='<%="validateResults( this," + index + "," + lowerBound + "," + upperBound + "," + lowerAbnormalBound + "," + upperAbnormalBound + ", \"XXXX\" );" +
 						               "markUpdated(" + index + "); " +
@@ -847,7 +847,7 @@ function enableDisableResult(index) {
 						  indexed="true"
 						  property="resultValue"
 						  size="20"
-						  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() %>'
+						  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTorsResultRequired() %>'
                           style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 						  title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
 						  styleId='<%="results_" + index %>'
@@ -861,7 +861,7 @@ function enableDisableResult(index) {
 						  indexed="true"
 						  property="resultValue"
 						  rows="2"
-						  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() %>'
+						  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTorsResultRequired() %>'
 						  style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 						  title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
 						  styleId='<%="results_" + index %>'

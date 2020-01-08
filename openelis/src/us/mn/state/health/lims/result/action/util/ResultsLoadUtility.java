@@ -869,7 +869,7 @@ public class ResultsLoadUtility {
         TestResultItem testItem = new TestResultItem();
         
         if(testResultStatus != null &&  testResultStatus.getTypeOfResultStatus() != null) {
-        	testItem.setTestResultStatusId(testResultStatus.getTypeOfResultStatus().getId());
+        	testItem.setTorsResultRequired(testResultStatus.getTypeOfResultStatus().getIsResultRequired());
             testItem.setTypeOfResultStatus(testResultStatus.getTypeOfResultStatus());
         }
         

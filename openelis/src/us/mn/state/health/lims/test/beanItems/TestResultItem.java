@@ -131,7 +131,7 @@ public class TestResultItem implements ResultItem, Serializable{
     private FormFile uploadedFile;
     private String uploadedFileName;
 	private boolean isReferredOutValueChanged = false;
-	private String testResultStatusId = "";
+	private boolean torsResultRequired = true;
 	private TypeOfResultStatus typeOfResultStatus = null;
 
     public String getAccessionNumber() {
@@ -656,20 +656,22 @@ public class TestResultItem implements ResultItem, Serializable{
         return map.toString();
     }
     
-	public String getTestResultStatusId() {
-		return testResultStatusId;
+	 
+	public boolean isTorsResultRequired() {
+		return torsResultRequired;
 	}
 	
-	public void setTestResultStatusId(String testResultStatusId) {
-		this.testResultStatusId = testResultStatusId;
+	public void setTorsResultRequired(boolean torsResultRequired) {
+		this.torsResultRequired = torsResultRequired;
 	}
+	
 	public TypeOfResultStatus getTypeOfResultStatus() {
 		return typeOfResultStatus;
 	}
+	
 	public void setTypeOfResultStatus(TypeOfResultStatus typeOfResultStatus) {
 		this.typeOfResultStatus = typeOfResultStatus;
-	} 
-	
+	}
 	
 	
 	
