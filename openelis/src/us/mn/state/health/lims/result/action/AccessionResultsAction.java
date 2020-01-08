@@ -102,7 +102,7 @@ public class AccessionResultsAction extends BaseAction {
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
 
 		//TYPE_OF_RESULT_STATUS 		
-		PropertyUtils.setProperty(dynaForm, "typeofresultstatus", TypeOfResultStatusUtil.getAllActiveTypeOfResultStatus());
+		PropertyUtils.setProperty(dynaForm, "typeofresultstatus", new TypeOfResultStatusDAOImpl().getAllActiveResultStatus());
 		
 
 		ResultsPaging paging = new ResultsPaging();

@@ -22,6 +22,7 @@ import org.apache.struts.upload.FormFile;
 import us.mn.state.health.lims.common.util.IdValuePair;
 import us.mn.state.health.lims.result.action.util.ResultItem;
 import us.mn.state.health.lims.result.valueholder.Result;
+import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -131,6 +132,7 @@ public class TestResultItem implements ResultItem, Serializable{
     private String uploadedFileName;
 	private boolean isReferredOutValueChanged = false;
 	private String testResultStatusId = "";
+	private TypeOfResultStatus typeOfResultStatus = null;
 
     public String getAccessionNumber() {
 		return accessionNumber;
@@ -660,6 +662,16 @@ public class TestResultItem implements ResultItem, Serializable{
 	
 	public void setTestResultStatusId(String testResultStatusId) {
 		this.testResultStatusId = testResultStatusId;
+	}
+	public TypeOfResultStatus getTypeOfResultStatus() {
+		return typeOfResultStatus;
+	}
+	public void setTypeOfResultStatus(TypeOfResultStatus typeOfResultStatus) {
+		this.typeOfResultStatus = typeOfResultStatus;
 	} 
+	
+	
+	
+	
     
 }

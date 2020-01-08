@@ -867,8 +867,12 @@ public class ResultsLoadUtility {
                 : analysis.getCompletedDateForDisplay();
 
         TestResultItem testItem = new TestResultItem();
-
-        testItem.setTestResultStatusId((testResultStatus != null &&  testResultStatus.getTypeOfResultStatus() != null) ? testResultStatus.getTypeOfResultStatus().getId() : null);
+        
+        if(testResultStatus != null &&  testResultStatus.getTypeOfResultStatus() != null) {
+        	testItem.setTestResultStatusId(testResultStatus.getTypeOfResultStatus().getId());
+            testItem.setTypeOfResultStatus(testResultStatus.getTypeOfResultStatus());
+        }
+        
         testItem.setAccessionNumber(accessionNumber);
         testItem.setAnalysisId(analysis.getId());
         testItem.setSequenceNumber(sequenceNumber);

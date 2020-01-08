@@ -1,3 +1,4 @@
+<%@page import="us.mn.state.health.lims.typeoftestresult.valueholder.TypeOfTestResult"%>
 <%@ page language="java"
 	contentType="text/html; charset=utf-8"
 	import="java.util.Date, java.util.List,
@@ -21,7 +22,8 @@
     us.mn.state.health.lims.common.util.Versioning,
 	us.mn.state.health.lims.testreflex.action.util.TestReflexResolver,
 	java.net.URLDecoder,
-    us.mn.state.health.lims.siteinformation.daoimpl.SiteInformationDAOImpl"%>
+    us.mn.state.health.lims.siteinformation.daoimpl.SiteInformationDAOImpl,
+    us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus"%>
 
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
@@ -432,6 +434,23 @@ function /*void*/ processTestReflexCD4Success(xhr)
 
 }
 
+function enableDisableResult(index) { 
+	 var torsSelected = document.getElementById("testResultStatusId_" + index).value;
+	 //alert(torsSelected);
+	 
+	 //alert(isResRequired)
+	 if(torsSelected > 0) {
+		 var isResRequired = document.getElementById("torsResRequired_"+torsSelected).value;
+		 if(isResRequired == "false") {
+			 document.getElementById("results_"+index).value="";
+			 document.getElementById("results_"+index).disabled=true;
+		 } 
+	 } else {
+		 document.getElementById("results_"+index).disabled=false;
+	 }
+	 
+}
+
 
 </script>
 
@@ -777,22 +796,33 @@ function /*void*/ processTestReflexCD4Success(xhr)
 		</td>
 		<!-- result status cell -->
 		<td>
-		<select name="<%="testResult[" + index + "].testResultStatusId" %>"
-			        id='<%="testResultStatusId_" + index%>'
-                    class="testResultStatus"
-					 >
-               <option value='0'> 
-                        <bean:message key="test.resultstatus.select" /> 
-                </option> 
-			<logic:iterate id="optionValue" name='<%=formName %>' property="typeofresultstatus" type="IdValuePair" >
-					<option value='<%=optionValue.getId()%>'  <%if(optionValue.getId().equals(testResult.getTestResultStatusId())) out.print("selected='selected'"); %>  >
-							<bean:write name="optionValue" property="value"/>
+			<select
+			name="<%="testResult[" + index + "].testResultStatusId"%>"
+			id='<%="testResultStatusId_" + index%>' class="testResultStatus" 
+			onchange=enableDisableResult(<%=index%>)>
+				<option value='0'>
+					<bean:message key="test.resultstatus.select" />
+				</option>
+
+				<logic:iterate id="optionValue" name='<%=formName %>'
+					property="typeofresultstatus" type="TypeOfResultStatus">
+					<option value='<%=optionValue.getId()%>'
+						<%if (optionValue.getId().equals(testResult.getTestResultStatusId()))
+				out.print("selected='selected'");%>>
+						<%=optionValue.getName()%>
 					</option>
+				</logic:iterate>
+			</select> 
+			<logic:iterate id="optionValue" name='<%=formName%>'
+				property="typeofresultstatus" type="TypeOfResultStatus">
+				<input type="hidden"
+					id="torsResRequired_<%=optionValue.getId()%>"
+					name="optionValue"
+					value="<%=optionValue.getIsResultRequired()%>" indexed="true" />
 			</logic:iterate>
-			</select>
 		</td>
-		<!-- result cell -->
-		<td id='<%="cell_" + index %>' class="ruled">
+						<!-- result cell -->
+		<td id='<%="cell_" + index%>' class="ruled">
 			<logic:equal name="testResult" property="resultType" value="N">
 			    <input type="text"
 			           name='<%="testResult[" + index + "].resultValue" %>'
