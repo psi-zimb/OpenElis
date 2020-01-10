@@ -3,19 +3,19 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="us.mn.state.health.lims.testresultstatus.valueholder.TestResultStatus" table="TEST_RESULT_STATUS" optimistic-lock="version" dynamic-update="true">
+    <class name="us.mn.state.health.lims.teststatus.valueholder.TestStatus" table="TEST_STATUS" optimistic-lock="version" dynamic-update="true">
         <id name="id" type="us.mn.state.health.lims.hibernate.resources.usertype.LIMSStringNumberUserType">
             <column name="ID" precision="10" scale="0" />
             <generator class="sequence">
-            	<param name="sequence">test_result_status_seq</param>
+            	<param name="sequence">test_status_seq</param>
             </generator>	
         </id>
          <many-to-one name="test" class="us.mn.state.health.lims.test.valueholder.Test" fetch="select">
             <column name="TEST_ID" precision="10" scale="0" />
         </many-to-one>
         
-         <many-to-one name="typeOfResultStatus" class="us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus" fetch="select">
-            <column name="RESULT_STATUS_ID" precision="10" scale="0" />
+         <many-to-one name="typeOfTestStatus" class="us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus" fetch="select">
+            <column name="TEST_STATUS_ID" precision="10" scale="0" />
         </many-to-one>         
          
     </class>

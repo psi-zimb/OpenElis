@@ -19,26 +19,26 @@
 	   </th>
 	   
 	   <th> 
-	   	  <bean:message key="typeofresultstatus.name"/>
+	   	  <bean:message key="typeofteststatus.name"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofresultstatus.description"/>
+	   	  <bean:message key="typeofteststatus.description"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofresultstatus.statusType"/>
+	   	  <bean:message key="typeofteststatus.statusType"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofresultstatus.isActive"/>
+	   	  <bean:message key="typeofteststatus.isActive"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofresultstatus.isResultRequired"/>
+	   	  <bean:message key="typeofteststatus.isResultRequired"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofresultstatus.isApprovalRequired"/>
+	   	  <bean:message key="typeofteststatus.isApprovalRequired"/>
 	   </th>
   
 	</tr>
-	<logic:iterate id="tors" indexId="ctr" name="<%=formName%>" property="menuList" type="us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus">
+	<logic:iterate id="tors" indexId="ctr" name="<%=formName%>" property="menuList" type="us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus">
 	<bean:define id="torsID" name="tors" property="id"/>
 	  <tr>
 	   <td class="textcontent">

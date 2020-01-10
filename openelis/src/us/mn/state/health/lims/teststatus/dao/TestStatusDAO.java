@@ -13,19 +13,17 @@
 *
 * Copyright (C) The Minnesota Department of Health.  All Rights Reserved.
 */
-package us.mn.state.health.lims.testresultstatus.dao;
-
-import java.util.List;
+package us.mn.state.health.lims.teststatus.dao;
 
 import us.mn.state.health.lims.common.dao.BaseDAO;
 import us.mn.state.health.lims.common.exception.LIMSRuntimeException; 
-import us.mn.state.health.lims.testresultstatus.valueholder.TestResultStatus;
+import us.mn.state.health.lims.teststatus.valueholder.TestStatus;
 
 
-public interface TestResultStatusDAO extends BaseDAO {
+public interface TestStatusDAO extends BaseDAO {
 
-	public boolean insertData(TestResultStatus testResultStatus) throws LIMSRuntimeException;
+	public boolean insertData(TestStatus testStatus) throws LIMSRuntimeException;
 
 
-	public TestResultStatus getTestResultStatusByTestId(String testId)throws LIMSRuntimeException; 
+	public TestStatus getTestStatusByTestId(String testId)throws LIMSRuntimeException;
 }

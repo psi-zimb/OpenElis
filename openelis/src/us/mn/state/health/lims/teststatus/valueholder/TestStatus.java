@@ -13,17 +13,13 @@
 * 
 * Copyright (C) The Minnesota Department of Health.  All Rights Reserved.
 */
-package us.mn.state.health.lims.testresultstatus.valueholder;
+package us.mn.state.health.lims.teststatus.valueholder;
 
 import us.mn.state.health.lims.common.valueholder.BaseObject;
-import us.mn.state.health.lims.common.valueholder.EnumValueItemImpl;
-import us.mn.state.health.lims.scriptlet.valueholder.Scriptlet;
 import us.mn.state.health.lims.test.valueholder.Test;
-import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
-import us.mn.state.health.lims.common.valueholder.ValueHolder;
-import us.mn.state.health.lims.common.valueholder.ValueHolderInterface;
+import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
 
-public class TestResultStatus extends BaseObject {
+public class TestStatus extends BaseObject {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +27,7 @@ public class TestResultStatus extends BaseObject {
 	
 	private Test test;
 	
-	private TypeOfResultStatus typeOfResultStatus;
+	private TypeOfTestStatus typeOfTestStatus;
 
 	public String getId() {
 		return id;
@@ -49,12 +45,12 @@ public class TestResultStatus extends BaseObject {
 		this.test = test;
 	}
 
-	public TypeOfResultStatus getTypeOfResultStatus() {
-		return typeOfResultStatus;
+	public TypeOfTestStatus getTypeOfTestStatus() {
+		return typeOfTestStatus;
 	}
 
-	public void setTypeOfResultStatus(TypeOfResultStatus typeOfResultStatus) {
-		this.typeOfResultStatus = typeOfResultStatus;
+	public void setTypeOfTestStatus(TypeOfTestStatus typeOfTestStatus) {
+		this.typeOfTestStatus = typeOfTestStatus;
 	}
 	
 }

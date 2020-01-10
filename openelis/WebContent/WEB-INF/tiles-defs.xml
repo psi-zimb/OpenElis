@@ -212,7 +212,7 @@
            <put name="rightSystemModule" value="systemModuleMenuDefinition" />
            <put name="rightSystemUserModule" value="systemUserModuleMenuDefinition" />
            <put name="rightSystemUserSection" value="systemUserSectionMenuDefinition" />
-           <put name="rightTypeOfResultStatus" value="typeOfResultStatusMenuDefinition" />
+           <put name="righttypeOfTestStatus" value="typeOfTestStatusMenuDefinition" />
          
            
     </definition>
@@ -830,11 +830,11 @@
          <put name="body" value="/pages/login/loginUser.jsp" /> 
     </definition>  
     
-    <definition name="typeOfResultStatusDefinition" extends="baseDefinition">
-         <put name="body" value="/pages/typeofresultstatus/typeOfResultStatus.jsp" /> 
+    <definition name="typeOfTestStatusDefinition" extends="baseDefinition">
+         <put name="body" value="/pages/typeofteststatus/typeOfTestStatus.jsp" />
     </definition>
-    <definition name="typeOfResultStatusMenuDefinition" extends="baseMenuSelectListDefinition">
-       <put name="body" value="/pages/typeofresultstatus/typeOfResultStatusMenu.jsp" />
+    <definition name="typeOfTestStatusMenuDefinition" extends="baseMenuSelectListDefinition">
+       <put name="body" value="/pages/typeofteststatus/typeOfTestStatusMenu.jsp" />
     </definition>
 
     <!--QA EVENTS FORM ITEMS-->    <!--bugzilla 2501-->

@@ -81,7 +81,7 @@ public class DefaultAdministrationFormFields extends AAdministrationFormFields {
 		defaultAttributes.put(Field.TestUsageAggregatation, Boolean.FALSE);
 		defaultAttributes.put(Field.ResultReporting, Boolean.FALSE);
 		defaultAttributes.put(Field.PrintedReportsConfiguration, Boolean.TRUE);
-		defaultAttributes.put(Field.TypeOfResultStatusMenu, Boolean.FALSE);
+		defaultAttributes.put(Field.TypeOfTestStatusMenu, Boolean.FALSE);
 		
 	}
 

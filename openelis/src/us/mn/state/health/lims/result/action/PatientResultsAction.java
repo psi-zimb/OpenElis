@@ -27,8 +27,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.validator.GenericValidator;
 import org.apache.struts.action.*;
-
-import typeofresultstatus.util.TypeOfResultStatusUtil;
 import us.mn.state.health.lims.common.action.BaseAction;
 import us.mn.state.health.lims.common.action.IActionConstants;
 import us.mn.state.health.lims.common.util.ConfigurationProperties;
@@ -45,6 +43,7 @@ import us.mn.state.health.lims.result.action.util.ResultsLoadUtility;
 import us.mn.state.health.lims.result.action.util.ResultsPaging;
 import us.mn.state.health.lims.statusofsample.util.StatusOfSampleUtil.AnalysisStatus;
 import us.mn.state.health.lims.test.beanItems.TestResultItem;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
 
 public class PatientResultsAction extends BaseAction {
 
@@ -64,7 +63,7 @@ public class PatientResultsAction extends BaseAction {
 		PropertyUtils.setProperty(dynaForm, "referralReasons", ReferralUtil.getReferralReasons());
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
-		PropertyUtils.setProperty(dynaForm, "typeofresultstatus", TypeOfResultStatusUtil.getAllActiveTypeOfResultStatus());
+		PropertyUtils.setProperty(dynaForm, "typeofteststatuses", new TypeOfTestStatusDAOImpl().getAllActiveTestStatus());
 
 		ResultsPaging paging = new ResultsPaging();
 		String newPage = request.getParameter("page");

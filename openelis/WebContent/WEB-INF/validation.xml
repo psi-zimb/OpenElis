@@ -2215,22 +2215,22 @@
           </form>
           
  <!--TYPE_OF_RESULT_STATUS-->
-         <form name="typeOfResultStatusForm">
+         <form name="typeOfTestStatusForm">
             <field property="name" depends="required">
-              <arg0 key="typeofresultstatus.name" />
+              <arg0 key="typeOfTestStatus.name" />
               <var>
                 <var-name>mask</var-name>
                 <var-value>^[TDNRA]{1}$</var-value>
                </var>
              </field>
             <field property="description" depends="required,maxlength">
-              <arg0 key="typeofresultstatus.description" />
+              <arg0 key="typeOfTestStatus.description" />
               <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
                <var><var-name>maxlength</var-name>
                <var-value>20</var-value></var>
             </field>
             <field property="statusType" depends="required">
-                 <arg0 key="typeofresultstatus.statusType" />
+                 <arg0 key="typeOfTestStatus.statusType" />
             </field>
           </form>
 

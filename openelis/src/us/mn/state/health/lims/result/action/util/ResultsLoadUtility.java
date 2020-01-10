@@ -70,9 +70,7 @@ import us.mn.state.health.lims.resultlimits.valueholder.ResultLimit;
 import us.mn.state.health.lims.sample.valueholder.Sample;
 import us.mn.state.health.lims.samplehuman.dao.SampleHumanDAO;
 import us.mn.state.health.lims.samplehuman.daoimpl.SampleHumanDAOImpl;
-import us.mn.state.health.lims.sampleitem.dao.SampleItemDAO;
 import us.mn.state.health.lims.sampleitem.valueholder.SampleItem;
-import us.mn.state.health.lims.siteinformation.daoimpl.SiteInformationDAOImpl;
 import us.mn.state.health.lims.statusofsample.util.StatusOfSampleUtil;
 import us.mn.state.health.lims.statusofsample.util.StatusOfSampleUtil.AnalysisStatus;
 import us.mn.state.health.lims.statusofsample.util.StatusOfSampleUtil.OrderStatus;
@@ -90,9 +88,9 @@ import us.mn.state.health.lims.testreflex.valueholder.TestReflex;
 import us.mn.state.health.lims.testresult.dao.TestResultDAO;
 import us.mn.state.health.lims.testresult.daoimpl.TestResultDAOImpl;
 import us.mn.state.health.lims.testresult.valueholder.TestResult;
-import us.mn.state.health.lims.testresultstatus.valueholder.TestResultStatus;
-import us.mn.state.health.lims.testresultstatus.dao.TestResultStatusDAO;
-import us.mn.state.health.lims.testresultstatus.daoimpl.TestResultStatusDAOImpl;
+import us.mn.state.health.lims.teststatus.valueholder.TestStatus;
+import us.mn.state.health.lims.teststatus.dao.TestStatusDAO;
+import us.mn.state.health.lims.teststatus.daoimpl.TestStatusDAOImpl;
 import us.mn.state.health.lims.typeofsample.util.TypeOfSampleUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -853,8 +851,8 @@ public class ResultsLoadUtility {
         }
         
         //Result status
-        TestResultStatusDAO trsDAO = new TestResultStatusDAOImpl();
-        TestResultStatus testResultStatus = trsDAO.getTestResultStatusByTestId(test.getId()); 
+        TestStatusDAO trsDAO = new TestStatusDAOImpl();
+        TestStatus testStatus = trsDAO.getTestStatusByTestId(test.getId());
 
         String uom = "";
         if (!isCD4Conclusion) {
@@ -868,9 +866,10 @@ public class ResultsLoadUtility {
 
         TestResultItem testItem = new TestResultItem();
         
-        if(testResultStatus != null &&  testResultStatus.getTypeOfResultStatus() != null) {
-        	testItem.setTorsResultRequired(testResultStatus.getTypeOfResultStatus().getIsResultRequired());
-            testItem.setTypeOfResultStatus(testResultStatus.getTypeOfResultStatus());
+        if(testStatus != null &&  testStatus.getTypeOfTestStatus() != null) {
+        	testItem.setTotsResultRequired(testStatus.getTypeOfTestStatus().getIsResultRequired());
+        	testItem.setTypeOfTestStatusId(testStatus.getId());
+            testItem.setTypeOfTestStatus(testStatus.getTypeOfTestStatus());
         }
         
         testItem.setAccessionNumber(accessionNumber);

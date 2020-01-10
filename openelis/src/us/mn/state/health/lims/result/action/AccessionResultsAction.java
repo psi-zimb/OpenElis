@@ -21,10 +21,7 @@ import java.lang.Object;
 import java.lang.String;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +34,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.DynaActionForm;
 
-import typeofresultstatus.util.TypeOfResultStatusUtil;
 import us.mn.state.health.lims.common.action.BaseAction;
 import us.mn.state.health.lims.common.util.ConfigurationProperties;
 import us.mn.state.health.lims.common.util.ConfigurationProperties.Property;
@@ -47,10 +43,7 @@ import us.mn.state.health.lims.inventory.action.InventoryUtility;
 import us.mn.state.health.lims.inventory.form.InventoryKitItem;
 import us.mn.state.health.lims.login.dao.UserModuleDAO;
 import us.mn.state.health.lims.login.daoimpl.UserModuleDAOImpl;
-import us.mn.state.health.lims.organization.dao.OrganizationDAO;
-import us.mn.state.health.lims.organization.daoimpl.OrganizationDAOImpl;
 import us.mn.state.health.lims.organization.util.OrganizationUtils;
-import us.mn.state.health.lims.organization.valueholder.Organization;
 import us.mn.state.health.lims.patient.valueholder.Patient;
 import us.mn.state.health.lims.referral.util.ReferralUtil;
 import us.mn.state.health.lims.result.action.util.ResultsLoadUtility;
@@ -67,8 +60,7 @@ import us.mn.state.health.lims.test.beanItems.TestResultItem;
 import us.mn.state.health.lims.userrole.dao.UserRoleDAO;
 import us.mn.state.health.lims.userrole.daoimpl.UserRoleDAOImpl;
 import us.mn.state.health.lims.test.valueholder.Test;
-import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
-import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
 import us.mn.state.health.lims.test.daoimpl.TestDAOImpl;
 import us.mn.state.health.lims.test.dao.TestDAO;
 
@@ -102,7 +94,7 @@ public class AccessionResultsAction extends BaseAction {
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
 
 		//TYPE_OF_RESULT_STATUS 		
-		PropertyUtils.setProperty(dynaForm, "typeofresultstatus", new TypeOfResultStatusDAOImpl().getAllActiveResultStatus());
+		PropertyUtils.setProperty(dynaForm, "typeofteststatuses", new TypeOfTestStatusDAOImpl().getAllActiveTestStatus());
 		
 
 		ResultsPaging paging = new ResultsPaging();
