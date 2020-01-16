@@ -338,11 +338,11 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 	}
 
 	@Override
-	public TypeOfTestStatus getTypeOfTestStatusById(String resultStatusId) throws LIMSRuntimeException {
+	public TypeOfTestStatus getTypeOfTestStatusById(String totsId) throws LIMSRuntimeException {
 		try {
 			String sql = "from TypeOfTestStatus totr where totr.id = :param";
 			Query query = HibernateUtil.getSession().createQuery(sql);
-			query.setParameter("param", Integer.parseInt(resultStatusId));
+			query.setParameter("param", Integer.parseInt(totsId));
 
 			List list = query.list();
 
@@ -354,7 +354,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 			}
 		} catch (Exception e) {
 			LogEvent.logErrorStack("TypeOfTestStatusDAOImpl", "getTypeOfTestStatusById(String resultStatusId)", e);
-			throw new LIMSRuntimeException("Error in getTypeOfTestStatusByType(String resultStatusId)", e);
+			throw new LIMSRuntimeException("Error in getTypeOfTestStatusById(String totsId)", e);
 		}
 
 		return null;

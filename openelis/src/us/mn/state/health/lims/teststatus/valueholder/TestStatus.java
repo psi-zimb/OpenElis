@@ -25,9 +25,9 @@ public class TestStatus extends BaseObject {
 
 	private String id;
 	
-	private Test test;
+	private String testId;
 	
-	private TypeOfTestStatus typeOfTestStatus;
+	private String testStatusId;
 
 	public String getId() {
 		return id;
@@ -35,22 +35,21 @@ public class TestStatus extends BaseObject {
 
 	public void setId(String id) {
 		this.id = id;
-	} 
-
-	public Test getTest() {
-		return test;
 	}
 
-	public void setTest(Test test) {
-		this.test = test;
+	public String getTestId() {
+		return testId;
 	}
 
-	public TypeOfTestStatus getTypeOfTestStatus() {
-		return typeOfTestStatus;
+	public void setTestId(String testId) {
+		this.testId = testId;
 	}
 
-	public void setTypeOfTestStatus(TypeOfTestStatus typeOfTestStatus) {
-		this.typeOfTestStatus = typeOfTestStatus;
+	public String getTestStatusId() {
+		return testStatusId;
 	}
-	
+
+	public void setTestStatusId(String testStatusId) {
+		this.testStatusId = testStatusId;
+	}
 }

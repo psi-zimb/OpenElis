@@ -24,6 +24,7 @@ public interface TestStatusDAO extends BaseDAO {
 
 	public boolean insertData(TestStatus testStatus) throws LIMSRuntimeException;
 
-
 	public TestStatus getTestStatusByTestId(String testId)throws LIMSRuntimeException;
+
+    public void insertOrUpdate(TestStatus testStatus);
 }

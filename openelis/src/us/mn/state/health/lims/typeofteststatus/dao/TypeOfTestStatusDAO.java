@@ -51,7 +51,7 @@ public interface TypeOfTestStatusDAO extends BaseDAO {
 
 	public TypeOfTestStatus getTypeOfTestStatusByName(String typeOfTestStatusName) throws LIMSRuntimeException;
 
-    public TypeOfTestStatus getTypeOfTestStatusById(String resultTypeId) throws LIMSRuntimeException;
+    public TypeOfTestStatus getTypeOfTestStatusById(String totsId) throws LIMSRuntimeException;
     
     public List getAllActiveTestStatus() throws LIMSRuntimeException;
     

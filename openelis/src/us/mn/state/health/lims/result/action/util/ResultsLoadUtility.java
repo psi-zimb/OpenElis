@@ -92,6 +92,8 @@ import us.mn.state.health.lims.teststatus.valueholder.TestStatus;
 import us.mn.state.health.lims.teststatus.dao.TestStatusDAO;
 import us.mn.state.health.lims.teststatus.daoimpl.TestStatusDAOImpl;
 import us.mn.state.health.lims.typeofsample.util.TypeOfSampleUtil;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
+import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
@@ -866,10 +868,11 @@ public class ResultsLoadUtility {
 
         TestResultItem testItem = new TestResultItem();
         
-        if(testStatus != null &&  testStatus.getTypeOfTestStatus() != null) {
-        	testItem.setTotsResultRequired(testStatus.getTypeOfTestStatus().getIsResultRequired());
-        	testItem.setTypeOfTestStatusId(testStatus.getId());
-            testItem.setTypeOfTestStatus(testStatus.getTypeOfTestStatus());
+        if(testStatus != null &&  testStatus.getTestStatusId() != null) {
+            TypeOfTestStatus tots = new TypeOfTestStatusDAOImpl().getTypeOfTestStatusById(testStatus.getTestStatusId());
+        	testItem.setTotsResultRequired(tots.getIsResultRequired());
+        	testItem.setTypeOfTestStatusId(tots.getId());
+            testItem.setTypeOfTestStatus(tots);
         }
         
         testItem.setAccessionNumber(accessionNumber);

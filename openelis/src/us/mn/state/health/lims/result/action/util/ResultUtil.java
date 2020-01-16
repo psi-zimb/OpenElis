@@ -78,7 +78,8 @@ public class ResultUtil {
 				("M".equals(item.getResultType()) && !GenericValidator.isBlankOrNull(item.getMultiSelectResultValues()));
 	}
 
-    public static boolean areFiles(TestResultItem item) {
+
+	public static boolean areFiles(TestResultItem item) {
         FormFile uploadedFile = item.getUploadedFile();
         return !GenericValidator.isBlankOrNull(uploadedFile.getFileName());
     }

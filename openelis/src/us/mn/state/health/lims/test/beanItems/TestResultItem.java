@@ -54,7 +54,15 @@ public class TestResultItem implements ResultItem, Serializable{
         return GenericValidator.isBlankOrNull(getResult().getValue());
     }
 
-    public enum Method{ DNA, MANUAL, AUTO; }
+	public boolean isTestStatusModified() {
+    	if((typeOfTestStatus == null && typeOfTestStatusId != null) ||
+				(typeOfTestStatus != null && !typeOfTestStatusId.equals(typeOfTestStatus.getId()))) {
+    		return true;
+		}
+    	return false;
+	}
+
+	public enum Method{ DNA, MANUAL, AUTO; }
 	public enum ResultDisplayType { TEXT, POS_NEG, POS_NEG_IND, HIV, SYPHILIS; }
 
 	private String sampleSource;

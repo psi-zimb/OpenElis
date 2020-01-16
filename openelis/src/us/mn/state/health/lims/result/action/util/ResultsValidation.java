@@ -103,7 +103,7 @@ public class ResultsValidation {
 	
 	private void validateResult(TestResultItem testResultItem, List<ActionError> errors) {
 
-		if (!(ResultUtil.areNotes(testResultItem) || (supportReferrals && testResultItem.isReferredOut()) || ResultUtil.areResults(testResultItem) || ResultUtil.areFiles(testResultItem))) { // only
+		if (!(ResultUtil.areNotes(testResultItem) || (supportReferrals && testResultItem.isReferredOut()) || ResultUtil.areResults(testResultItem) || ResultUtil.areFiles(testResultItem) || testResultItem.isTestStatusModified())) { // only
 			errors.add(new ActionError("errors.result.required"));
 		}
 
@@ -127,15 +127,17 @@ public class ResultsValidation {
 	}
 	
 	private void validateRequiredNote(TestResultItem item, List<ActionError> errors) {
-		if( GenericValidator.isBlankOrNull(item.getNote())&&
-			!GenericValidator.isBlankOrNull(item.getResultId())){
-			
-			Result dbResult = resultDAO.getResultById(item.getResultId());
-			if( !item.getResultValue().equals(dbResult.getValue()) && !GenericValidator.isBlankOrNull(dbResult.getValue())){
-				errors.add(new ActionError("error.requiredNote.missing"));
+		if( GenericValidator.isBlankOrNull(item.getNote()) ) {
+			if(!GenericValidator.isBlankOrNull(item.getResultId())) {
+				Result dbResult = resultDAO.getResultById(item.getResultId());
+				if( !item.getResultValue().equals(dbResult.getValue()) && !GenericValidator.isBlankOrNull(dbResult.getValue()) ) {
+					errors.add(new ActionError("error.requiredNote.missing"));
+				}
+			}
+			if(item.isTestStatusModified()) {
+				errors.add(new ActionError("error.test.status.requiredNote.missing"));
 			}
 		}
-		
 	}
 	private void validateTesterSignature(TestResultItem item, List<ActionError> errors) {
 		// Conclusions may not need a signature. If the user changed the value

@@ -10,13 +10,12 @@
             	<param name="sequence">test_status_seq</param>
             </generator>	
         </id>
-         <many-to-one name="test" class="us.mn.state.health.lims.test.valueholder.Test" fetch="select">
-            <column name="TEST_ID" precision="10" scale="0" />
-        </many-to-one>
-        
-         <many-to-one name="typeOfTestStatus" class="us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus" fetch="select">
-            <column name="TEST_STATUS_ID" precision="10" scale="0" />
-        </many-to-one>         
+        <property name="testId" type="us.mn.state.health.lims.hibernate.resources.usertype.LIMSStringNumberUserType">
+            <column name="test_id" precision="10" scale="0" />
+        </property>
+        <property name="testStatusId" type="us.mn.state.health.lims.hibernate.resources.usertype.LIMSStringNumberUserType">
+            <column name="test_status_id" precision="10" scale="0" />
+        </property>
          
     </class>
 </hibernate-mapping>

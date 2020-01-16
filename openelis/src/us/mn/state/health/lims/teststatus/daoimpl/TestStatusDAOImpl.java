@@ -33,11 +33,6 @@ public class TestStatusDAOImpl extends BaseDAOImpl implements TestStatusDAO {
 	public boolean insertData(TestStatus testStatus) throws LIMSRuntimeException {
 		try {
 			String id = (String)HibernateUtil.getSession().save(testStatus);
-			
-			AuditTrailDAO auditDAO = new AuditTrailDAOImpl();
-			String sysUserId = testStatus.getSysUserId();
-			String tableName = "TEST_STATUS";
-			auditDAO.saveNewHistory(testStatus,sysUserId,tableName);
 
 			HibernateUtil.getSession().flush();
 			HibernateUtil.getSession().clear();
@@ -54,7 +49,7 @@ public class TestStatusDAOImpl extends BaseDAOImpl implements TestStatusDAO {
 	public TestStatus getTestStatusByTestId(String testId)throws LIMSRuntimeException {
 		TestStatus testStatus = null;
 		try {
-			String sql = "from TestStatus ts where ts.test = :testId";
+			String sql = "from TestStatus ts where ts.testId = :testId";
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setInteger("testId", Integer.parseInt(testId));
 			
@@ -72,5 +67,29 @@ public class TestStatusDAOImpl extends BaseDAOImpl implements TestStatusDAO {
 		}
 
 		return testStatus;
+	}
+
+	@Override
+	public void insertOrUpdate(TestStatus testStatus) {
+		TestStatus existingTestStatusRecord = getTestStatusByTestId(testStatus.getTestId());
+		if(existingTestStatusRecord != null) {
+			testStatus.setId(existingTestStatusRecord.getId());
+			updateData(testStatus);
+		} else {
+			insertData(testStatus);
+		}
+	}
+
+	public void updateData(TestStatus newTestStatus) throws LIMSRuntimeException {
+		try {
+			HibernateUtil.getSession().merge(newTestStatus);
+			HibernateUtil.getSession().flush();
+			HibernateUtil.getSession().clear();
+			HibernateUtil.getSession().evict(newTestStatus);
+			HibernateUtil.getSession().refresh(newTestStatus);
+		} catch (Exception e) {
+			LogEvent.logError("testStatusDAOImpl", "updateData()", e.toString());
+			throw new LIMSRuntimeException("Error in testStatus updateData()", e);
+		}
 	}
 }
