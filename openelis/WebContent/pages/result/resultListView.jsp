@@ -445,18 +445,23 @@
 	function clearOutResultSection(index) {
 		if(document.getElementById("results_"+index)) {
 			document.getElementById("results_"+index).value="";
+			document.getElementById("results_"+index).disabled="true";
 		}
 		if(document.getElementById("qualifiedDict_"+index)) {
 			document.getElementById("qualifiedDict_" + index).value = "";
+			document.getElementById("qualifiedDict_"+index).disabled="true";
 		}
 		if(document.getElementById("log_"+index)) {
 			document.getElementById("log_"+index).value="";
+			document.getElementById("log_"+index).disabled="true";
 		}
 		if(document.getElementById("abnormalId_"+index)) {
 			document.getElementById("abnormalId_"+index).checked=false;
+			document.getElementById("abnormalId_"+index).disabled="true";
 		}
 		if(document.getElementById("referralId_"+index)) {
 			document.getElementById("referralId_"+index).checked=false;
+			document.getElementById("referralId_"+index).disabled="true";
 		}
 
 		if(document.getElementById("referralReasonId_"+index)) {
@@ -464,6 +469,7 @@
 			for(var i = 0; i < elementsR.length; i++){
 				elementsR[i].selected = false;
 			}
+			document.getElementById("referralReasonId_"+index).disabled="true";
 		}
 
 		if(document.getElementById("referralOrganizationId_"+index)) {
@@ -471,6 +477,7 @@
 			for(var i = 0; i < elementsO.length; i++){
 				elementsO[i].selected = false;
 			}
+			document.getElementById("referralOrganizationId_"+index).disabled="true";
 		}
 	}
 

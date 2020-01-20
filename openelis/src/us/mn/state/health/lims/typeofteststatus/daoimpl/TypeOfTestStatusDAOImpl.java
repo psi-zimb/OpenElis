@@ -191,13 +191,13 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 
 	public List getNextTypeOfTestStatusRecord(String id) throws LIMSRuntimeException {
 
-		return getNextRecord(id, "typeOfTestStatus", TypeOfTestStatus.class);
+		return getNextRecord(id, "TypeOfTestStatus", TypeOfTestStatus.class);
 
 	}
 
 	public List getPreviousTypeOfTestStatusRecord(String id) throws LIMSRuntimeException {
 
-		return getPreviousRecord(id, "typeOfTestStatus", TypeOfTestStatus.class);
+		return getPreviousRecord(id, "TypeOfTestStatus", TypeOfTestStatus.class);
 	}
 
 	public Integer getTotalTypeOfTestStatusCount() throws LIMSRuntimeException {
