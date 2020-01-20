@@ -166,6 +166,13 @@
 					}
 				}
 		);
+		$jq("select[class=testStatus]").each(
+				function(){
+					var index = this.id.slice(this.id.length-1,this.id.length);
+					enableDisableResult(index);
+				}
+		);
+
 	});
 
 	function handleMultiSelectChange( e, data ){

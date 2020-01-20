@@ -17,7 +17,8 @@ package us.mn.state.health.lims.teststatus.daoimpl;
 
 import java.util.List;
 
- 
+
+import org.hibernate.Query;
 import us.mn.state.health.lims.common.exception.LIMSRuntimeException;
 import us.mn.state.health.lims.common.log.LogEvent;
 import us.mn.state.health.lims.hibernate.HibernateUtil;
@@ -77,6 +78,22 @@ public class TestStatusDAOImpl extends BaseDAOImpl implements TestStatusDAO {
 			updateData(testStatus);
 		} else {
 			insertData(testStatus);
+		}
+	}
+
+	@Override
+	public void deleteData(TestStatus testStatus) {
+		try {
+			TestStatus data = (TestStatus) getTestStatusByTestId(testStatus.getTestId());
+			if(data != null) {
+				HibernateUtil.getSession().delete(data);
+				HibernateUtil.getSession().flush();
+				HibernateUtil.getSession().clear();
+			}
+		} catch (Exception e) {
+			//bugzilla 2154
+			LogEvent.logError("testStatusDAOImpl","deleteData()",e.toString());
+			throw new LIMSRuntimeException("Error in TestStatus deleteData()",e);
 		}
 	}
 

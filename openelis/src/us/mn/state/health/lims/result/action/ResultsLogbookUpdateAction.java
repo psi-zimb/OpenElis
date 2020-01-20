@@ -490,12 +490,16 @@ public class ResultsLogbookUpdateAction extends BaseAction implements IResultSav
 
     private void updateTestStatus(TestResultItem testResultItem) {
 
+
         TestStatusDAO testStatusDAO = new TestStatusDAOImpl();
         TestStatus testStatus = new TestStatus();
         testStatus.setTestId(testResultItem.getTestId());
         testStatus.setTestStatusId(testResultItem.getTypeOfTestStatusId());
-
-        testStatusDAO.insertOrUpdate(testStatus);
+        if("0".equals(testResultItem.getTypeOfTestStatusId())) {
+            testStatusDAO.deleteData(testStatus);
+        } else {
+            testStatusDAO.insertOrUpdate(testStatus);
+        }
     }
 
     private void createFileForResult(TestResultItem testResultItem) {
