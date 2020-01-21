@@ -2214,12 +2214,14 @@
             </field>
           </form>
           
- <!--TYPE_OF_TEST_STATUS-->
-         <form name="typeOfTestStatusForm">
+ <!--TYPE_OF_RESULT_STATUS-->
+         <form name="typeOfResultStatusForm">
             <field property="name" depends="required">
-              <arg0 key="typeofteststatus.name" />
-                <var><var-name>maxlength</var-name>
-                    <var-value>20</var-value></var>
+              <arg0 key="typeofresultstatus.name" />
+              <var>
+                <var-name>mask</var-name>
+                <var-value>^[TDNRA]{1}$</var-value>
+               </var>
              </field>
             <field property="description" depends="required,maxlength">
               <arg0 key="typeofresultstatus.description" />
@@ -2230,15 +2232,6 @@
             <field property="statusType" depends="required">
                  <arg0 key="typeofresultstatus.statusType" />
             </field>
-             <field property="isActive" depends="required">
-                 <arg0 key="typeofresultstatus.isActive" />
-             </field>
-             <field property="isResultRequired" depends="required">
-                 <arg0 key="typeofresultstatus.isResultRequired" />
-             </field>
-             <field property="isApprovalRequired" depends="required">
-                 <arg0 key="typeofresultstatus.isApprovalRequired" />
-             </field>
           </form>
 
 <!--UNIT_OF_MEASURE-->

@@ -13,11 +13,8 @@
 * 
 * Copyright (C) The Minnesota Department of Health.  All Rights Reserved.
 */
-package us.mn.state.health.lims.typeofteststatus.action;
-/**
- * @author Buvaneswari Arun
- *
- */
+package us.mn.state.health.lims.typeofresultstatus.action;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,14 +22,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.DynaActionForm;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import us.mn.state.health.lims.common.action.BaseMenuAction;
-import us.mn.state.health.lims.common.util.SystemConfiguration;
-import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
-import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
+import us.mn.state.health.lims.common.util.SystemConfiguration; 
+import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;  
+import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
+import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
 
-public class TypeOfTestStatusMenuAction extends BaseMenuAction {
+public class TypeOfResultStatusMenuAction extends BaseMenuAction {
 
 	protected List createMenuList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
@@ -40,28 +41,28 @@ public class TypeOfTestStatusMenuAction extends BaseMenuAction {
 
  		//System.out.println("I am in TypeOfResultStatusMenuAction createMenuList()");
 
-		List typeOfTestStatus = new ArrayList();
+		List typeOfResultStatus = new ArrayList();
 
 		String stringStartingRecNo = (String) request
 				.getAttribute("startingRecNo");
 		int startingRecNo = Integer.parseInt(stringStartingRecNo);
 
-		TypeOfTestStatusDAO typeOfTestStatusDAO = new TypeOfTestStatusDAOImpl();
-		typeOfTestStatus = typeOfTestStatusDAO.getPageOfTypeOfTestStatus(startingRecNo);
+		TypeOfResultStatusDAO typeOfResultStatusDAO = new TypeOfResultStatusDAOImpl(); 
+		typeOfResultStatus = typeOfResultStatusDAO.getPageOfTypeOfResultStatus(startingRecNo);
 
-		request.setAttribute("menuDefinition", "TypeOfTestStatusMenuDefinition");
+		request.setAttribute("menuDefinition", "TypeOfResultStatusMenuDefinition"); 
 		
-		request.setAttribute(MENU_TOTAL_RECORDS, String.valueOf(typeOfTestStatusDAO
-				.getTotalTypeOfTestStatusCount()));
+		request.setAttribute(MENU_TOTAL_RECORDS, String.valueOf(typeOfResultStatusDAO
+				.getTotalTypeOfResultStatusCount()));
 		request.setAttribute(MENU_FROM_RECORD, String.valueOf(startingRecNo));
 		int numOfRecs = 0;
-		if (typeOfTestStatus != null) {
-			if (typeOfTestStatus.size() > SystemConfiguration.getInstance()
+		if (typeOfResultStatus != null) {
+			if (typeOfResultStatus.size() > SystemConfiguration.getInstance()
 					.getDefaultPageSize()) {
 				numOfRecs = SystemConfiguration.getInstance()
 						.getDefaultPageSize();
 			} else {
-				numOfRecs = typeOfTestStatus.size();
+				numOfRecs = typeOfResultStatus.size();
 			}
 			numOfRecs--;
 		}
@@ -69,7 +70,7 @@ public class TypeOfTestStatusMenuAction extends BaseMenuAction {
 		request.setAttribute(MENU_TO_RECORD, String.valueOf(endingRecNo));
 		//end bugzilla 1411
 		
-		return typeOfTestStatus;
+		return typeOfResultStatus;
 	}
 
 	protected String getPageTitleKey() {

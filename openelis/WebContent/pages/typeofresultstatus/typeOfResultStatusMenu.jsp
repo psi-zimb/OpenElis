@@ -19,22 +19,22 @@
 	   </th>
 	   
 	   <th> 
-	   	  <bean:message key="typeofteststatus.name"/>
+	   	  <bean:message key="typeofresultstatus.name"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofteststatus.description"/>
+	   	  <bean:message key="typeofresultstatus.description"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofteststatus.statusType"/>
+	   	  <bean:message key="typeofresultstatus.statusType"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofteststatus.isActive"/>
+	   	  <bean:message key="typeofresultstatus.isActive"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofteststatus.isResultRequired"/>
+	   	  <bean:message key="typeofresultstatus.isResultRequired"/>
 	   </th>
 	   <th>
-	   	  <bean:message key="typeofteststatus.isApprovalRequired"/>
+	   	  <bean:message key="typeofresultstatus.isApprovalRequired"/>
 	   </th>
   
 	</tr>

@@ -1,21 +1,21 @@
 /**
  * 
  */
-package us.mn.state.health.lims.typeofteststatus.util;
+package typeofresultstatus.util;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import us.mn.state.health.lims.common.util.IdValuePair;
-import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
-import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
-import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
+import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
+import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
+import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
 
 /**
  * @author srivathsalac
  *
  */
-public class TypeOfTestStatusUtil {
+public class TypeOfResultStatusUtil {
 
 	private static List<IdValuePair> toResultStatuses;
 
@@ -23,13 +23,13 @@ public class TypeOfTestStatusUtil {
 
 		if (toResultStatuses == null) {
 
-			TypeOfTestStatusDAO torsDAO = new TypeOfTestStatusDAOImpl();
-			List<TypeOfTestStatus> torsList = torsDAO.getAllActiveTestStatus();
+			TypeOfResultStatusDAO torsDAO = new TypeOfResultStatusDAOImpl();
+			List<TypeOfResultStatus> torsList = torsDAO.getAllActiveResultStatus();
 
 			if (torsList != null && torsList.size() > 0) {
 				toResultStatuses = new ArrayList<IdValuePair>();
 
-				for (TypeOfTestStatus tors : torsList) {
+				for (TypeOfResultStatus tors : torsList) {
 					toResultStatuses.add(new IdValuePair(tors.getId(), tors.getName()));
 				}
 			}
