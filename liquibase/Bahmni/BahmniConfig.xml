@@ -768,19 +768,19 @@
             <column name="editable" valueBoolean="false"/>
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
-            insert into system_role_module 
+            insert into system_role_module
                 (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
-            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id 
-                from system_role r, system_module m 
-                where trim(r.name) = 'LabDashboard' and 
+            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
+                from system_role r, system_module m
+                where trim(r.name) = 'LabDashboard' and
                     m.name = 'LabDashboard'
         </sql>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
-            insert into system_role_module 
+            insert into system_role_module
                 (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
-            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id 
-                from system_role r, system_module m 
-                where trim(r.name) = 'Upload' and 
+            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
+                from system_role r, system_module m
+                where trim(r.name) = 'Upload' and
                     m.name = 'Upload'
         </sql>
     </changeSet>
@@ -797,11 +797,11 @@
             <where>name='Dashboard'</where>
         </update>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
-            insert into system_role_module 
+            insert into system_role_module
                 (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
-            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id 
-                from system_role r, system_module m 
-                where trim(r.name) = 'LabDashboard' and 
+            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
+                from system_role r, system_module m
+                where trim(r.name) = 'LabDashboard' and
                     m.name = 'LabDashboard'
         </sql>
     </changeSet>
@@ -817,11 +817,11 @@
             <column name="has_delete_flag" value="N"/>
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
-            insert into system_role_module 
+            insert into system_role_module
                 (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
-            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id 
-                from system_role r, system_module m 
-                where trim(r.name) = 'Validation' and 
+            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
+                from system_role r, system_module m
+                where trim(r.name) = 'Validation' and
                     m.name = 'ResultValidation:All Sections'
         </sql>
     </changeSet>
@@ -852,7 +852,7 @@
             <column name="display_key" value="banner.menu.results.logbook" />
             <column name="tool_tip_key" value="tooltip.banner.menu.results.logbook" />
         </insert>
-    </changeSet>    
+    </changeSet>
     <changeSet id="56" author="tw" context="bahmni">
         <comment>Increase the column size for result and notes column</comment>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
@@ -898,11 +898,11 @@
             <column name="has_delete_flag" value="N"/>
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
-            insert into system_role_module 
+            insert into system_role_module
                 (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
-            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id 
-                from system_role r, system_module m 
-                where trim(r.name) = 'Intake' and 
+            select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
+                from system_role r, system_module m
+                where trim(r.name) = 'Intake' and
                     m.name = 'HealthCenter'
         </sql>
     </changeSet>
@@ -1065,7 +1065,7 @@
         <comment>Add event records for existing accession</comment>
         <sql>
             INSERT INTO event_records(uuid,title,timestamp,object,category)
-            SELECT uuid_generate_v4(), 'accession', now(), concat('/openelis/ws/rest/accession/', uuid), 'patient' 
+            SELECT uuid_generate_v4(), 'accession', now(), concat('/openelis/ws/rest/accession/', uuid), 'patient'
             FROM sample;
         </sql>
     </changeSet>
@@ -1111,10 +1111,10 @@
     <changeSet id="84" author="tw" context="bahmni">
         <comment>Set system user id from non_user_name</comment>
         <sql>
-            update result_signature as rs 
-            set system_user_id = su.id 
-            from system_user su 
-            where rs.non_user_name = concat(su.first_name, ' ', su.last_name) 
+            update result_signature as rs
+            set system_user_id = su.id
+            from system_user su
+            where rs.non_user_name = concat(su.first_name, ' ', su.last_name)
                 and rs.system_user_id is null;
         </sql>
     </changeSet>
@@ -1259,7 +1259,7 @@
         <comment>Update cron_statement to correct cron schedule</comment>
         <sql>
             update quartz_cron_scheduler set cron_statement='0/15 * * * * ?' where name='atom-feed-openmrs-lab';
-            update quartz_cron_scheduler set cron_statement='0/15 * * * * ?' where 
+            update quartz_cron_scheduler set cron_statement='0/15 * * * * ?' where
             name='atom-feed-openmrs-lab-failed';
         </sql>
     </changeSet>
@@ -1745,5 +1745,155 @@
 			defaultValueDate="CURRENT_TIMESTAMP(6)" />
 		<column name="lastupdated" type="timestamp(6)" />
 	</createTable>
+</changeSet>
+<changeSet author="buvaneswari" id="20">
+   <comment>create a new table to store type of test status</comment>
+   <createSequence sequenceName="type_of_test_status_seq" minValue="0" startValue="1"/>
+   <createTable schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" type="int">
+         <constraints primaryKeyName="pk_type_of_test_status" primaryKey="true" />
+      </column>
+      <column name="name" type="varchar(50)">
+         <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="description" type="varchar(200)">
+         <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="status_type" type="varchar(20)">
+         <constraints nullable="false"/>
+      </column>
+      <column name="is_active" type="boolean" defaultValueBoolean="true"/>
+      <column name="is_result_required" type="boolean" defaultValueBoolean="false"/>
+      <column name="is_approval_required" type="boolean" defaultValueBoolean="false"/>
+      <column name="date_created" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP(6)" />
+      <column name="lastupdated" type="timestamp(6)" />
+   </createTable>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Sample clotted"/>
+      <column name="description" value="When sample is clotted and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Sample insufficient"/>
+      <column name="description" value="When sample is insufficient and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Sample not labelled"/>
+      <column name="description" value="When sample is not labelled. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Sample not submitted"/>
+      <column name="description" value="When sample is not submitted and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Sample submitted late"/>
+      <column name="description" value="When sample is submitted late and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Unsuitable sample"/>
+      <column name="description" value="When sample is not suitable for test and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Wrong sample tube"/>
+      <column name="description" value="When sample is collected in wrong tube and unable to perform the test. Result should not be entered."/>
+      <column name="status_type" value="SAMPLE"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Test not available"/>
+      <column name="description" value="When Test is unavailable and copuld not be outsourced. Result should not be entered."/>
+      <column name="status_type" value="TEST"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Outsourced"/>
+      <column name="description" value="When Test is unavailable and is outsourced"/>
+      <column name="status_type" value="TEST"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+   <insert schemaName="clinlims" tableName="type_of_test_status">
+      <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
+      <column name="name" value="Failure"/>
+      <column name="description" value="Other Reasons for Failure. Result should not be entered."/>
+      <column name="status_type" value="TEST"/>
+      <column name="is_active" value="true"/>
+      <column name="is_result_required" value="false"  />
+      <column name="is_approval_required" value="false"  />
+      <column name="lastupdated" valueDate=" now() "/>
+   </insert>
+</changeSet>
+<changeSet author="srivathsala" id="21">
+   <comment>create a new table to store status for a test</comment>
+   <createSequence sequenceName="test_status_seq" minValue="0" startValue="1"/>
+   <createTable schemaName="clinlims" tableName="test_status">
+      <column name="id" type="int">
+         <constraints primaryKeyName="pk_test_status" primaryKey="true" />
+      </column>
+      <column name="test_id" type="int">
+         <constraints nullable="true" unique="true"/>
+      </column>
+      <column name="test_status_id" type="int">
+         <constraints nullable="true"/>
+      </column>
+      <addForeignKeyConstraint baseColumnNames="test_id"
+            baseTableName="test_status"
+            constraintName="test_fk"
+            onDelete="SET NULL"
+            referencedColumnNames="id"
+            referencedTableName="test"/>
+      <addForeignKeyConstraint baseColumnNames="test_status_id"
+            baseTableName="test_status"
+            constraintName="test_status_fk"
+            onDelete="SET NULL"
+            referencedColumnNames="id"
+            referencedTableName="type_of_test_status"/>
+   </createTable>
 </changeSet>
 </databaseChangeLog>
