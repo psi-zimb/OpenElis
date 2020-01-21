@@ -13,7 +13,7 @@
 * 
 * Copyright (C) The Minnesota Department of Health.  All Rights Reserved.
 */
-package us.mn.state.health.lims.typeofresultstatus.action;
+package us.mn.state.health.lims.typeofteststatus.action;
 
 import java.util.List;
 
@@ -27,16 +27,16 @@ import org.apache.struts.action.DynaActionForm;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import us.mn.state.health.lims.common.action.BaseAction;
-import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
-import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
-import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
+import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
+import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
 
 
 /**
  * @author srivathsalac
  *
  */
-public class TypeOfResultStatusAction extends BaseAction {
+public class TypeOfTestStatusAction extends BaseAction {
 
 	private boolean isNew = false;
 
@@ -61,24 +61,24 @@ public class TypeOfResultStatusAction extends BaseAction {
 		// initialize the form
 		dynaForm.initialize(mapping);
 
-		TypeOfResultStatus typeOfResultStatus = new TypeOfResultStatus();
-		System.out.println("I am in TypeOfResultStatusAction and this is id " + id);
+		TypeOfTestStatus typeOfTestStatus = new TypeOfTestStatus();
+		System.out.println("I am in TypeOfTestStatusAction and this is id " + id);
 		if ((id != null) && (!"0".equals(id))) {  
-			typeOfResultStatus.setId(id);
-			TypeOfResultStatusDAO typeOfResultStatusDAO = new TypeOfResultStatusDAOImpl();
-			typeOfResultStatusDAO.getData(typeOfResultStatus);
+			typeOfTestStatus.setId(id);
+			TypeOfTestStatusDAO typeOfTestStatusDAO = new TypeOfTestStatusDAOImpl();
+			typeOfTestStatusDAO.getData(typeOfTestStatus);
 
 			isNew = false; // this is to set correct page title
 			
 			// do we need to enable next or previous?
 			//bugzilla 1427 pass in desc not id
-			List typeOfResultStatuss = typeOfResultStatusDAO.getNextTypeOfResultStatusRecord(typeOfResultStatus.getDescription());
+			List typeOfResultStatuss = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getDescription());
 			if (typeOfResultStatuss.size() > 0) {
 				// enable next button
 				request.setAttribute(NEXT_DISABLED, "false");
 			}
 			//bugzilla 1427 pass in desc not id
-			typeOfResultStatuss = typeOfResultStatusDAO.getPreviousTypeOfResultStatusRecord(typeOfResultStatus.getDescription());
+			typeOfResultStatuss = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getDescription());
 			if (typeOfResultStatuss.size() > 0) {
 				// enable next button
 				request.setAttribute(PREVIOUS_DISABLED, "false");
@@ -92,12 +92,12 @@ public class TypeOfResultStatusAction extends BaseAction {
 
 		}
 
-		if (typeOfResultStatus.getId() != null && !typeOfResultStatus.getId().equals("0")) {
-			request.setAttribute(ID, typeOfResultStatus.getId());
+		if (typeOfTestStatus.getId() != null && !typeOfTestStatus.getId().equals("0")) {
+			request.setAttribute(ID, typeOfTestStatus.getId());
 		}
 
 		// populate form from valueholder
-		PropertyUtils.copyProperties(form, typeOfResultStatus);
+		PropertyUtils.copyProperties(form, typeOfTestStatus);
 
 		System.out.println("I am in TypeOfResultStatusAction this is forward " + forward);
 		return mapping.findForward(forward);

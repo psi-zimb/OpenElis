@@ -4529,21 +4529,52 @@
           <forward name="success" path="masterListsPageDefinition"/> 
           <forward name="fail" path="masterListsPageDefinition"/>
           <forward name="close" path="masterListsPageDefinition"/> 
-       </action>  
-       
- <!--TYPE_OF_RESULT_STATUS-->       
-       <action path="/TypeOfResultStatus" name="typeOfResultStatusForm" type="us.mn.state.health.lims.typeofresultstatus.action.TypeOfResultStatusAction" validate="false">
-          <forward name="success" path="typeOfResultStatusDefinition"/> 
-          <forward name="fail" path="masterListsPageDefinition"/> 
-       </action> 
-       
-        <action path="/TypeOfResultStatusMenu" name="typeOfResultStatusMenuForm" type="us.mn.state.health.lims.typeofresultstatus.action.TypeOfResultStatusMenuAction">
-          <forward name="success" path="masterListsPageDefinition"/> 
-          <forward name="fail" path="/MasterListsPage.do"/> 
        </action>
-       
-       
-<!--UNIT_OF_MEASURE-->       
+        <!--TYPE_OF_TEST_STATUS-Buvaneswari-->
+        <action path="/TypeOfTestStatus" name="typeOfTestStatusForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestStatusAction" validate="false">
+            <forward name="success" path="typeOfTestStatusDefinition"/>
+            <forward name="fail" path="masterListsPageDefinition"/>
+        </action>
+
+        <action path="/UpdateTypeOfTestStatus" name="typeOfTestStatusForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestStatusAction" validate="false">
+            <forward name="success" path="/TypeOfTestStatusMenu.do" redirect="true"/>
+            <forward name="insertSuccess" path="/TypeOfTestStatus.do" redirect="true"/>
+            <forward name="fail" path="typeOfTestStatusDefinition"/>
+        </action>
+
+        <action path="/UpdateNextPreviousTypeOfTestStatus" name="typeOfTestStatusForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestResultUpdateAction" validate="false">
+            <forward name="success" path="/NextPreviousTypeOfTestResult.do"/>
+            <forward name="fail" path="typeOfTestResultDefinition"/>
+        </action>
+
+        <action path="/NextPreviousTypeOfTestStatus" name="typeOfTestResultForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestResultNextPreviousAction" validate="false">
+            <forward name="success" path="/TypeOfTestStatus.do" redirect="true"/>
+            <forward name="fail" path="typeOfTestStatusDefinition"/>
+        </action>
+
+        <action path="/CancelTypeOfTestResult" name="typeOfTestStatusMenuForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestStatusCancelAction" validate="false">
+            <forward name="success" path="/TypeOfTestStatusMenu.do"/>
+            <forward name="close" path="/TypeOfTestStatusMenu.do"/>
+            <forward name="fail" path="/TypeOfTestStatus.do"/>
+        </action>
+
+        <action path="/DeleteTypeOfTestResult" name="typeOfTestResultMenuForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestResultDeleteAction">
+            <forward name="success" path="/TypeOfTestResultMenu.do"/>
+            <forward name="fail" path="/TypeOfTestResultMenu.do"/>
+        </action>
+
+        <action path="/TypeOfTestResultMenu" name="typeOfTestResultMenuForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestResultMenuAction">
+            <forward name="success" path="masterListsPageDefinition"/>
+            <forward name="fail" path="/MasterListsPage.do" redirect="true"/>
+        </action>
+
+        <action path="/CancelTypeOfTestResultMenu" name="typeOfTestResultMenuForm" type="us.mn.state.health.lims.typeofteststatus.action.TypeOfTestResultMenuCancelAction" validate="false">
+            <forward name="success" path="masterListsPageDefinition"/>
+            <forward name="fail" path="masterListsPageDefinition"/>
+            <forward name="close" path="masterListsPageDefinition"/>
+        </action>
+
+<!--UNIT_OF_MEASURE-->
        <action path="/UnitOfMeasure" name="unitOfMeasureForm" type="us.mn.state.health.lims.unitofmeasure.action.UnitOfMeasureAction" validate="false">
           <forward name="success" path="unitOfMeasureDefinition"/> 
           <forward name="fail" path="masterListsPageDefinition"/> 

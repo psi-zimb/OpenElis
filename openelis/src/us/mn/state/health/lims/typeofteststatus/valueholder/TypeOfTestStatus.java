@@ -1,13 +1,13 @@
-package us.mn.state.health.lims.typeofresultstatus.valueholder;
+package us.mn.state.health.lims.typeofteststatus.valueholder;
 
 import java.sql.Timestamp;
 
 import us.mn.state.health.lims.common.valueholder.BaseObject;
 
-public class TypeOfResultStatus extends BaseObject {
+public class TypeOfTestStatus extends BaseObject {
 
 	/**
-	 * 
+	 * Buvaneswari Arun
 	 */
 	private static final long serialVersionUID = -7050083545355949587L;
 
@@ -27,7 +27,7 @@ public class TypeOfResultStatus extends BaseObject {
 	
 	private Timestamp dateCreated;
 	
-	public TypeOfResultStatus() {
+	public TypeOfTestStatus() {
 		super();
 	}
 
