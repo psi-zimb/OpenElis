@@ -2214,7 +2214,7 @@
             </field>
           </form>
           
- <!--TYPE_OF_RESULT_STATUS-->
+ <!--TYPE_OF_TEST_STATUS-->
          <form name="typeOfTestStatusForm">
             <field property="name" depends="required">
               <arg0 key="typeOfTestStatus.name" />
@@ -2232,6 +2232,15 @@
             <field property="statusType" depends="required">
                  <arg0 key="typeOfTestStatus.statusType" />
             </field>
+             <field property="isActive" depends="required">
+                 <arg0 key="typeOfTestStatus.isActive" />
+             </field>
+             <field property="isResultRequired" depends="required">
+                 <arg0 key="typeOfTestStatus.isResultRequired" />
+             </field>
+             <field property="isApprovalRequired" depends="required">
+                 <arg0 key="typeOfTestStatus.isApprovalRequired" />
+             </field>
           </form>
 
 <!--UNIT_OF_MEASURE-->

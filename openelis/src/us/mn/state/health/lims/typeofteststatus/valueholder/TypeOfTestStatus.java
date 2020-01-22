@@ -7,7 +7,7 @@ import us.mn.state.health.lims.common.valueholder.BaseObject;
 public class TypeOfTestStatus extends BaseObject {
 
 	/**
-	 * 
+	 * Buvaneswari Arun
 	 */
 	private static final long serialVersionUID = -7050083545355949587L;
 
