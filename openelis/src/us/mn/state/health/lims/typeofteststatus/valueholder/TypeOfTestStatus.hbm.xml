@@ -12,8 +12,8 @@
         </id>
         <version name="lastupdated" column="LASTUPDATED" type="timestamp" access="field"/>
 
-        <property name="name" type="java.lang.String">
-            <column name="NAME" length="20" />
+        <property name="statusName" type="java.lang.String">
+            <column name="STATUS_NAME" length="20" />
         </property>
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" length="100" />
@@ -21,13 +21,13 @@
          <property name="statusType" type="java.lang.String">
             <column name="STATUS_TYPE" length="20" />
         </property>
-        <property name="isActive" type="java.lang.Boolean">
+        <property name="isActive" type="java.lang.String">
             <column name="IS_ACTIVE" length="1" />
         </property>
-        <property name="isResultRequired" type="java.lang.Boolean">
+        <property name="isResultRequired" type="java.lang.String">
             <column name="IS_RESULT_REQUIRED" length="1" />
         </property>
-         <property name="isApprovalRequired" type="java.lang.Boolean">
+         <property name="isApprovalRequired" type="java.lang.String">
             <column name="IS_APPROVAL_REQUIRED" length="1" />
         </property>
     </class>

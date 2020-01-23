@@ -50,7 +50,7 @@ public class TypeOfTestStatusDeleteAction extends BaseAction {
 		// creating a new TypeOfResultStatus.
 		// If there is a parameter present, we should bring up an existing
 		// TypeOfResultStatus to edit.
-		System.out.println("Buvaneswari - I am inside TypeOfTestStatusDeleteAction perform action");
+
 		String forward = "success";
 		DynaActionForm dynaForm = (DynaActionForm) form;
 		String[] selectedIDs = (String[]) dynaForm.get("selectedIDs");

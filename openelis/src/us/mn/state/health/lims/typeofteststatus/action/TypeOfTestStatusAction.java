@@ -15,6 +15,7 @@
 */
 package us.mn.state.health.lims.typeofteststatus.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,14 +73,14 @@ public class TypeOfTestStatusAction extends BaseAction {
 			
 			// do we need to enable next or previous?
 			//bugzilla 1427 pass in desc not id
-			List typeOfTestStatuss = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getDescription());
-			if (typeOfTestStatuss.size() > 0) {
+			List typeOfTestStatuses = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getId());
+			if (typeOfTestStatuses.size() > 0) {
 				// enable next button
 				request.setAttribute(NEXT_DISABLED, "false");
 			}
 			//bugzilla 1427 pass in desc not id
-			typeOfTestStatuss = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getDescription());
-			if (typeOfTestStatuss.size() > 0) {
+			typeOfTestStatuses = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getId());
+			if (typeOfTestStatuses.size() > 0) {
 				// enable next button
 				request.setAttribute(PREVIOUS_DISABLED, "false");
 			}
@@ -98,7 +99,6 @@ public class TypeOfTestStatusAction extends BaseAction {
 
 		// populate form from valueholder
 		PropertyUtils.copyProperties(form, typeOfTestStatus);
-
 		System.out.println("I am in typeOfTestStatusAction this is forward " + forward);
 		return mapping.findForward(forward);
 	}

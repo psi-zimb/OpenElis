@@ -178,7 +178,7 @@ function setAction(form, action, validate, parameters) {
     var sessionid = getSessionFromURL(form.action);
 	var context = '<%= request.getContextPath() %>';
 	var formName = form.name; 
-	//alert("form name " + formName);
+	//alert("form name brvft" + formName);
 	var parsedFormName = formName.substring(1, formName.length - 4);
 	parsedFormName = formName.substring(0,1).toUpperCase() + parsedFormName;
     //alert("parsedFormName " + parsedFormName);

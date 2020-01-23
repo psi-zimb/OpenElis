@@ -2216,30 +2216,33 @@
           
  <!--TYPE_OF_TEST_STATUS-->
          <form name="typeOfTestStatusForm">
-            <field property="name" depends="required">
-              <arg0 key="typeOfTestStatus.name" />
-              <var>
-                <var-name>mask</var-name>
-                <var-value>^[TDNRA]{1}$</var-value>
-               </var>
+            <field property="statusName" depends="required">
+              <arg0 key="typeofteststatus.name" />
+                <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
              </field>
             <field property="description" depends="required,maxlength">
-              <arg0 key="typeOfTestStatus.description" />
+              <arg0 key="typeofteststatus.description" />F
               <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
-               <var><var-name>maxlength</var-name>
-               <var-value>20</var-value></var>
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
             </field>
             <field property="statusType" depends="required">
-                 <arg0 key="typeOfTestStatus.statusType" />
+                 <arg0 key="typeofteststatus.statusType" />
             </field>
              <field property="isActive" depends="required">
-                 <arg0 key="typeOfTestStatus.isActive" />
+                 <arg0 key="typeofteststatus.isActive" />
              </field>
              <field property="isResultRequired" depends="required">
-                 <arg0 key="typeOfTestStatus.isResultRequired" />
+                 <arg0 key="typeofteststatus.isResultRequired" />
              </field>
              <field property="isApprovalRequired" depends="required">
-                 <arg0 key="typeOfTestStatus.isApprovalRequired" />
+                 <arg0 key="typeofteststatus.isApprovalRequired" />
              </field>
           </form>
 

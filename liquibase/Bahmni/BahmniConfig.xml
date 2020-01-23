@@ -1746,14 +1746,14 @@
 		<column name="lastupdated" type="timestamp(6)" />
 	</createTable>
 </changeSet>
-<changeSet author="buvaneswari" id="20">
+<changeSet author="srivathsala20" id="20">
    <comment>create a new table to store type of test status</comment>
    <createSequence sequenceName="type_of_test_status_seq" minValue="0" startValue="1"/>
    <createTable schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" type="int">
          <constraints primaryKeyName="pk_type_of_test_status" primaryKey="true" />
       </column>
-      <column name="name" type="varchar(50)">
+      <column name="status_name" type="varchar(50)">
          <constraints nullable="false" unique="true"/>
       </column>
       <column name="description" type="varchar(200)">
@@ -1762,114 +1762,114 @@
       <column name="status_type" type="varchar(20)">
          <constraints nullable="false"/>
       </column>
-      <column name="is_active" type="boolean" defaultValueBoolean="true"/>
-      <column name="is_result_required" type="boolean" defaultValueBoolean="false"/>
-      <column name="is_approval_required" type="boolean" defaultValueBoolean="false"/>
+      <column name="is_active" type="varchar(1)" defaultValue="Y"/>
+      <column name="is_result_required" type="varchar(1)" defaultValue="N"/>
+      <column name="is_approval_required" type="varchar(1)" defaultValue="N"/>
       <column name="date_created" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP(6)" />
       <column name="lastupdated" type="timestamp(6)" />
    </createTable>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Sample clotted"/>
+      <column name="status_name" value="Sample clotted"/>
       <column name="description" value="When sample is clotted and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Sample insufficient"/>
+      <column name="status_name" value="Sample insufficient"/>
       <column name="description" value="When sample is insufficient and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Sample not labelled"/>
+      <column name="status_name" value="Sample not labelled"/>
       <column name="description" value="When sample is not labelled. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Sample not submitted"/>
+      <column name="status_name" value="Sample not submitted"/>
       <column name="description" value="When sample is not submitted and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Sample submitted late"/>
+      <column name="status_name" value="Sample submitted late"/>
       <column name="description" value="When sample is submitted late and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Unsuitable sample"/>
+      <column name="status_name" value="Unsuitable sample"/>
       <column name="description" value="When sample is not suitable for test and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Wrong sample tube"/>
+      <column name="status_name" value="Wrong sample tube"/>
       <column name="description" value="When sample is collected in wrong tube and unable to perform the test. Result should not be entered."/>
       <column name="status_type" value="SAMPLE"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Test not available"/>
+      <column name="status_name" value="Test not available"/>
       <column name="description" value="When Test is unavailable and copuld not be outsourced. Result should not be entered."/>
       <column name="status_type" value="TEST"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Outsourced"/>
+      <column name="status_name" value="Outsourced"/>
       <column name="description" value="When Test is unavailable and is outsourced"/>
       <column name="status_type" value="TEST"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
    <insert schemaName="clinlims" tableName="type_of_test_status">
       <column name="id" valueNumeric=" nextval( 'type_of_test_status_seq' )  "/>
-      <column name="name" value="Failure"/>
+      <column name="status_name" value="Failure"/>
       <column name="description" value="Other Reasons for Failure. Result should not be entered."/>
       <column name="status_type" value="TEST"/>
-      <column name="is_active" value="true"/>
-      <column name="is_result_required" value="false"  />
-      <column name="is_approval_required" value="false"  />
+      <column name="is_active" value="Y"/>
+      <column name="is_result_required" value="N"  />
+      <column name="is_approval_required" value="N"  />
       <column name="lastupdated" valueDate=" now() "/>
    </insert>
 </changeSet>
-<changeSet author="srivathsala" id="21">
+<changeSet author="srivathsala21" id="21">
    <comment>create a new table to store status for a test</comment>
    <createSequence sequenceName="test_status_seq" minValue="0" startValue="1"/>
    <createTable schemaName="clinlims" tableName="test_status">
@@ -1882,18 +1882,23 @@
       <column name="test_status_id" type="int">
          <constraints nullable="true"/>
       </column>
+   </createTable>
+  </changeSet>
+  <changeSet id="srivathsala22" author="tw" context="bahmni">
       <addForeignKeyConstraint baseColumnNames="test_id"
             baseTableName="test_status"
             constraintName="test_fk"
             onDelete="SET NULL"
             referencedColumnNames="id"
             referencedTableName="test"/>
+  </changeSet>
+  <changeSet id="srivathsala23" author="tw" context="bahmni">
       <addForeignKeyConstraint baseColumnNames="test_status_id"
             baseTableName="test_status"
             constraintName="test_status_fk"
             onDelete="SET NULL"
             referencedColumnNames="id"
             referencedTableName="type_of_test_status"/>
-   </createTable>
-</changeSet>
+  </changeSet> 
+
 </databaseChangeLog>

@@ -26,7 +26,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 
 	public void deleteData(List typeOfTestStatus) throws LIMSRuntimeException {
 		// add to audit trail
-		try {
+		/*try {
 			AuditTrailDAO auditDAO = new AuditTrailDAOImpl();
 			for (int i = 0; i < typeOfTestStatus.size(); i++) {
 				TypeOfTestStatus data = (TypeOfTestStatus) typeOfTestStatus.get(i);
@@ -42,7 +42,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		} catch (Exception e) {
 			LogEvent.logError("typeOfTestStatusDAOImpl", "AuditTrail deleteData()", e.toString());
 			throw new LIMSRuntimeException("Error in typeOfTestStatus AuditTrail deleteData()", e);
-		}
+		}*/
 
 		try {
 			for (int i = 0; i < typeOfTestStatus.size(); i++) {
@@ -68,10 +68,10 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 			String id = (String) HibernateUtil.getSession().save(typeOfTestStatus);
 			typeOfTestStatus.setId(id);
 
-			AuditTrailDAO auditDAO = new AuditTrailDAOImpl();
+			/*AuditTrailDAO auditDAO = new AuditTrailDAOImpl();
 			String sysUserId = typeOfTestStatus.getSysUserId();
 			String tableName = "TYPE_OF_TEST_STATUS";
-			auditDAO.saveNewHistory(typeOfTestStatus, sysUserId, tableName);
+			auditDAO.saveNewHistory(typeOfTestStatus, sysUserId, tableName);*/
 
 			HibernateUtil.getSession().flush();
 			HibernateUtil.getSession().clear();
@@ -98,7 +98,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		TypeOfTestStatus newData = typeOfTestStatus;
 
 		// add to audit trail
-		try {
+		/*try {
 			AuditTrailDAO auditDAO = new AuditTrailDAOImpl();
 			String sysUserId = typeOfTestStatus.getSysUserId();
 			String event = IActionConstants.AUDIT_TRAIL_UPDATE;
@@ -107,7 +107,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		} catch (Exception e) {
 			LogEvent.logError("typeOfTestStatusDAOImpl", "AuditTrail updateData()", e.toString());
 			throw new LIMSRuntimeException("Error in typeOfTestStatus AuditTrail updateData()", e);
-		}
+		}*/
 
 		try {
 			HibernateUtil.getSession().merge(typeOfTestStatus);
@@ -159,7 +159,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 			int endingRecNo = startingRecNo + (SystemConfiguration.getInstance().getDefaultPageSize() + 1);
 
 			// bugzilla 1399
-			String sql = "from TypeOfTestStatus t order by t.name";
+			String sql = "from TypeOfTestStatus t order by t.statusName";
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setFirstResult(startingRecNo - 1);
 			query.setMaxResults(endingRecNo - 1);
@@ -208,7 +208,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 
 		List list = new Vector();
 		try {
-			String sql = "from " + table + " t where id >= " + enquote(id) + " order by t.name";
+			String sql = "from " + table + " t where id > " + enquote(id) + " order by t.statusName";
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setFirstResult(1);
 			query.setMaxResults(2);
@@ -227,7 +227,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 
 		List list = new Vector();
 		try {
-			String sql = "from " + table + " t order by t.description desc where description <= " + enquote(id);
+			String sql = "from " + table + " t order by t.id desc where id < " + enquote(id);
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setFirstResult(1);
 			query.setMaxResults(2);
@@ -249,21 +249,20 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 
 			// not case sensitive hemolysis and Hemolysis are considered
 			// duplicates
-			String sql = "from TypeOfTestStatus t where (trim(lower(t.name)) = :param and t.id != :param2) or (trim(lower(t.statusType)) = :param3 and t.id != :param2)";
+			String sql = "from TypeOfTestStatus t where (trim(lower(t.statusName)) = :param)";
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
-			query.setParameter("param", typeOfTestStatus.getName().toLowerCase().trim());
-			
-			query.setParameter("param3", typeOfTestStatus.getStatusType().toLowerCase().trim());
+			query.setParameter("param", typeOfTestStatus.getStatusName().toLowerCase().trim());
 
 			// initialize with 0 (for new records where no id has been generated yet
 			String typeOfTestStatusId = "0";
-			if (!StringUtil.isNullorNill(typeOfTestStatus.getId())) {
+			if (!StringUtil.isNullorNill(typeOfTestStatus.getId()) && !"0".equals(typeOfTestStatus.getId())) {
 				typeOfTestStatusId = typeOfTestStatus.getId();
 			}
-			query.setParameter("param2", Integer.parseInt(typeOfTestStatusId));
-
 			List list = query.list();
-
+			TypeOfTestStatus duplicateEntry = list.isEmpty() ? null : (TypeOfTestStatus) list.get(0);
+			if(duplicateEntry.getId().equals(typeOfTestStatusId)) {
+				return false;
+			}
 			return list.size() > 0;
 
 		} catch (Exception e) {
@@ -273,7 +272,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 	}
 
 	// bugzilla 1866 to get HL7 value
-	public TypeOfTestStatus getTypeOfTestStatusByType(TypeOfTestStatus typeOfTestStatus)
+	public TypeOfTestStatus getTypeOfTestStatusByStatusType(TypeOfTestStatus typeOfTestStatus)
 			throws LIMSRuntimeException {
 		TypeOfTestStatus totr = null;
 		try {
@@ -298,11 +297,11 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 	}
 
 	@Override
-	public TypeOfTestStatus getTypeOfTestStatusByType(String TestStatusType) throws LIMSRuntimeException {
+	public TypeOfTestStatus getTypeOfTestStatusByStatusType(String statusType) throws LIMSRuntimeException {
 		try {
 			String sql = "from TypeOfTestStatus totr where upper(totr.statusType) = :param";
 			Query query = HibernateUtil.getSession().createQuery(sql);
-			query.setParameter("param", TestStatusType.trim().toUpperCase());
+			query.setParameter("param", statusType.trim().toUpperCase());
 			List list = query.list();
 			HibernateUtil.getSession().flush();
 			HibernateUtil.getSession().clear();
@@ -314,9 +313,9 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		}
 	}
 
-	public TypeOfTestStatus getTypeOfTestStatusByName(String typeOfTestStatusName) throws LIMSRuntimeException {
+	public TypeOfTestStatus getTypeOfTestStatusByStatusName(String typeOfTestStatusName) throws LIMSRuntimeException {
 		try {
-			String sql = "from TypeOfTestStatus totr where upper(totr.name) = :param";
+			String sql = "from TypeOfTestStatus totr where upper(totr.statusName) = :param";
 			Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setParameter("param", typeOfTestStatusName.trim().toUpperCase());
 
@@ -330,8 +329,8 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 			}
 		} catch (Exception e) {
 			LogEvent.logErrorStack("TypeOfTestStatusDAOImpl",
-					"getTypeOfTestStatusByName(String typeOfTestStatusName)", e);
-			throw new LIMSRuntimeException("Error in getTypeOfTestStatusByType(String typeOfTestStatusName)", e);
+					"getTypeOfTestStatusByStatusName(String typeOfTestStatusName)", e);
+			throw new LIMSRuntimeException("Error in getTypeOfTestStatusByStatusName(String typeOfTestStatusName)", e);
 		}
 
 		return null;

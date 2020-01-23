@@ -1,6 +1,6 @@
 <%@ page language="java"
-	contentType="text/html; charset=utf-8"
-	import="java.util.Date,
+		 contentType="text/html; charset=utf-8"
+		 import="java.util.Date,
 	us.mn.state.health.lims.common.action.IActionConstants" %>
 
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
@@ -11,86 +11,108 @@
 <bean:define id="formName" value='<%= (String)request.getAttribute(IActionConstants.FORM_NAME) %>' />
 
 <%!
-
-String allowEdits = "true";
-
+	String allowEdits = "true";
 %>
 
 <%
-if (request.getAttribute(IActionConstants.ALLOW_EDITS_KEY) != null) {
- allowEdits = (String)request.getAttribute(IActionConstants.ALLOW_EDITS_KEY);
-}
+	if (request.getAttribute(IActionConstants.ALLOW_EDITS_KEY) != null) {
+		allowEdits = (String)request.getAttribute(IActionConstants.ALLOW_EDITS_KEY);
+	}
 
 %>
 
 <script language="JavaScript1.2">
-function validateForm(form) {
- return validateTypeOfTestStatusForm(form);
-}
+	function validateForm(form) {
+		return validateTypeOfTestStatusForm(form);
+	}
 </script>
 
 <table>
-	    <tr>
-						<td class="label">
-							<bean:message key="typeofresultstatus.id"/>:
-						</td>
-						<td>
-							<app:text name="<%=formName%>" property="id" allowEdits="false"/>
-						</td>
-	    </tr>
-		<tr>
-						<td class="label">
-							<bean:message key="typeofresultstatus.name"/>:<span class="requiredlabel">*</span>
-						</td>
-						<td>
-							<html:text name="<%=formName%>" property="name"/>
-						</td>
-		</tr>
-		<tr>
-						<td class="label">
-							<bean:message key="typeofresultstatus.description"/>:<span class="requiredlabel">*</span>
-						</td>
-						<td>
-							<html:text name="<%=formName%>" property="description"/>
-						</td>
-        </tr>
-         <tr>
-						<td class="label">
-							<bean:message key="typeofresultstatus.isActive"/>:<span class="requiredlabel">*</span>
-						</td>
-						<td>
-							<html:text name="<%=formName%>" property="isActive"/>
-						</td>
-		 </tr>
-		 <tr>
-         						<td class="label">
-         							<bean:message key="typeofresultstatus.isResultRequired"/>:<span class="requiredlabel">*</span>
-         						</td>
-         						<td>
-         							<html:text name="<%=formName%>" property="isResultRequired"/>
-         						</td>
-         </tr>
-         <tr>
-                  						<td class="label">
-                  							<bean:message key="typeofresultstatus.isApprovalRequired"/>:<span class="requiredlabel">*</span>
-                  						</td>
-                  						<td>
-                  							<html:text name="<%=formName%>" property="isApprovalRequired"/>
-                  						</td>
-         </tr>
-         <tr>
-						<td class="label">
-							<bean:message key="typeofresultstatus.statusType"/>:<span class="requiredlabel">*</span>
-						</td>
-						<td>
-							<html:text name="<%=formName%>" property="statusType" size="1" onblur="this.value=this.value.toUpperCase()"/>
-						</td>
-          </tr>
 
- 		<tr>
-		<td>&nbsp;</td>
-		</tr>
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.id"/>:
+		</td>
+		<td>
+			<app:text name="<%=formName%>" property="id" allowEdits="false"/>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.statusType"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:select name="<%=formName%>" property="statusType">
+				<option value='NONE'> <bean:message key="test.status.select" /> </option>
+				<option value="SAMPLE">SAMPLE</option>
+				<option value="TEST">TEST</option>
+				</select>
+
+			</html:select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.name"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:text name="<%=formName%>" property="statusName"/>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.description"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:text name="<%=formName%>" property="description"/>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.isActive"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:radio styleId="isActiveTrue" name='<%= formName %>'
+						property="isActive"
+						value="Y" ><bean:message key="label.button.yes"/></html:radio>
+			<html:radio styleId="isActiveFalse" name='<%= formName %>'
+						property="isActive"
+						value="N" ><bean:message key="label.button.no"/></html:radio>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.isResultRequired"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:radio name='<%= formName %>'
+						property="isResultRequired"
+						value="Y" ><label for="yes"><bean:message key="label.button.yes"/></label></html:radio>
+			<html:radio name='<%= formName %>'
+						property="isResultRequired"
+						value="N" ><label for="no"><bean:message key="label.button.no"/></label></html:radio>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="label">
+			<bean:message key="typeofteststatus.isApprovalRequired"/>:<span class="requiredlabel">*</span>
+		</td>
+		<td>
+			<html:radio name='<%= formName %>'
+						property="isApprovalRequired"
+						value="Y" ><label for="yes"><bean:message key="label.button.yes"/></label></html:radio>
+			<html:radio name='<%= formName %>'
+						property="isApprovalRequired"
+						value="N" ><label for="no"><bean:message key="label.button.no"/></label></html:radio>
+		</td>
+	</tr>
+
 </table>
 
 <html:javascript formName="typeOfTestStatusForm"/>
-

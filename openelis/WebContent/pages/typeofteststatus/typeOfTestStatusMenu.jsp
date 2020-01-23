@@ -49,7 +49,7 @@
    	   </td>
    	    
 	   <td class="textcontent">
-	   	  <bean:write name="tors" property="name"/>
+	   	  <bean:write name="tors" property="statusName"/>
 	   </td>
 	   <td class="textcontent">
 	   	  <bean:write name="tors" property="description"/>

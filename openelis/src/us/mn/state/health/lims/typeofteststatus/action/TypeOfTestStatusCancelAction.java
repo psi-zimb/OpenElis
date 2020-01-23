@@ -43,9 +43,9 @@ public class TypeOfTestStatusCancelAction extends BaseAction {
 
 	}
 	protected String getPageTitleKey() {
-		return "typeofresultstatus.browse.title";
+		return "typeofteststatus.browse.title";
 	}
 	protected String getPageSubtitleKey() {
-		return "typeofresultstatus.browse.title";
+		return "typeofteststatus.browse.title";
 	}
 }

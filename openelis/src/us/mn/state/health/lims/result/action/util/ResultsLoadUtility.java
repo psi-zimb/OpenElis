@@ -870,7 +870,7 @@ public class ResultsLoadUtility {
         
         if(testStatus != null &&  testStatus.getTestStatusId() != null) {
             TypeOfTestStatus tots = new TypeOfTestStatusDAOImpl().getTypeOfTestStatusById(testStatus.getTestStatusId());
-        	testItem.setTotsResultRequired(tots.getIsResultRequired());
+        	testItem.setTotsResultRequired("Y".equals(tots.getIsResultRequired()) ? true : false);
         	testItem.setTypeOfTestStatusId(tots.getId());
             testItem.setTypeOfTestStatus(tots);
         }

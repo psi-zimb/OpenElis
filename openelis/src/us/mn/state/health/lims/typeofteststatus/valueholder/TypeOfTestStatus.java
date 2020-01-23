@@ -13,17 +13,17 @@ public class TypeOfTestStatus extends BaseObject {
 
 	private String id;
 	
-	private String name;
+	private String statusName;
 
 	private String description;
 
 	private String statusType;
 	
-	private Boolean isActive;
+	private String isActive;
+
+	private String isResultRequired;
 	
-	private Boolean isResultRequired;
-	
-	private Boolean isApprovalRequired;
+	private String isApprovalRequired;
 	
 	private Timestamp dateCreated;
 	
@@ -39,12 +39,12 @@ public class TypeOfTestStatus extends BaseObject {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getStatusName() {
+		return statusName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setStatusName(String statusName) {
+		this.statusName = statusName;
 	}
 
 	public String getDescription() {
@@ -63,36 +63,35 @@ public class TypeOfTestStatus extends BaseObject {
 		this.statusType = statusType;
 	}
 
-	public Boolean getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(Boolean isActive) {
-		this.isActive = isActive;
-	}
-
-	public Boolean getIsResultRequired() {
-		return isResultRequired;
-	}
-
-	public void setIsResultRequired(Boolean isResultRequired) {
-		this.isResultRequired = isResultRequired;
-	}
-
-	public Boolean getIsApprovalRequired() {
-		return isApprovalRequired;
-	}
-
-	public void setIsApprovalRequired(Boolean isApprovalRequired) {
-		this.isApprovalRequired = isApprovalRequired;
-	}
-
 	public Timestamp getDateCreated() {
 		return dateCreated;
 	}
 
 	public void setDateCreated(Timestamp dateCreated) {
 		this.dateCreated = dateCreated;
-	} 
+	}
 
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+	public String getIsResultRequired() {
+		return isResultRequired;
+	}
+
+	public void setIsResultRequired(String isResultRequired) {
+		this.isResultRequired = isResultRequired;
+	}
+
+	public String getIsApprovalRequired() {
+		return isApprovalRequired;
+	}
+
+	public void setIsApprovalRequired(String isApprovalRequired) {
+		this.isApprovalRequired = isApprovalRequired;
+	}
 }

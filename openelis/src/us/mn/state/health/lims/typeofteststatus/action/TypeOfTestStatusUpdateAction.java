@@ -23,12 +23,12 @@ import us.mn.state.health.lims.common.util.StringUtil;
 import us.mn.state.health.lims.common.util.resources.ResourceLocator;
 import us.mn.state.health.lims.common.util.validator.ActionError;
 import us.mn.state.health.lims.login.valueholder.UserSessionData;
-import us.mn.state.health.lims.typeofresultstatus.dao.TypeOfResultStatusDAO;
-import us.mn.state.health.lims.typeofresultstatus.daoimpl.TypeOfResultStatusDAOImpl;
-import us.mn.state.health.lims.typeofresultstatus.valueholder.TypeOfResultStatus;
 import us.mn.state.health.lims.typeoftestresult.dao.TypeOfTestResultDAO;
 import us.mn.state.health.lims.typeoftestresult.daoimpl.TypeOfTestResultDAOImpl;
 import us.mn.state.health.lims.typeoftestresult.valueholder.TypeOfTestResult;
+import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
+import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -72,29 +72,29 @@ public class TypeOfTestStatusUpdateAction extends BaseAction {
         String start = (String) request.getParameter("startingRecNo");
         String direction = (String) request.getParameter("direction");
 
-        TypeOfResultStatus typeOfResultStatus = new TypeOfResultStatus();
+        TypeOfTestStatus typeOfTestStatus = new TypeOfTestStatus();
         //get sysUserId from login module
         UserSessionData usd = (UserSessionData)request.getSession().getAttribute(USER_SESSION_DATA);
         String sysUserId = String.valueOf(usd.getSystemUserId());
-        typeOfResultStatus.setSysUserId(sysUserId);
+        typeOfTestStatus.setSysUserId(sysUserId);
 
         // populate valueholder from form
-        PropertyUtils.copyProperties(typeOfResultStatus, dynaForm);
+        PropertyUtils.copyProperties(typeOfTestStatus, dynaForm);
 
         try {
 
-            TypeOfResultStatusDAO typeOfResultStatusDAO = new TypeOfResultStatusDAOImpl();
+            TypeOfTestStatusDAO typeOfTestStatusDAO = new TypeOfTestStatusDAOImpl();
 
             if (!isNew) {
                 // UPDATE
-                typeOfResultStatusDAO.updateData(typeOfResultStatus);
+                typeOfTestStatusDAO.updateData(typeOfTestStatus);
             } else {
                 // INSERT
-                typeOfResultStatusDAO.insertData(typeOfResultStatus);
+                typeOfTestStatusDAO.insertData(typeOfTestStatus);
             }
         } catch (LIMSRuntimeException lre) {
             //bugzilla 2154
-            LogEvent.logError("TypeOfResultStatusUpdateAction","performAction()",lre.toString());
+            LogEvent.logError("TypeOfTestStatusUpdateAction","performAction()",lre.toString());
             request.setAttribute(IActionConstants.REQUEST_FAILED, true);
             errors = new ActionMessages();
             java.util.Locale locale = (java.util.Locale) request.getSession()
@@ -106,7 +106,7 @@ public class TypeOfTestStatusUpdateAction extends BaseAction {
             } else {
                 // bugzilla 1482
                 if (lre.getException() instanceof LIMSDuplicateRecordException) {
-                    String messageKey = "typeofresultstatus.testResultStatus";
+                    String messageKey = "typeofteststatus.name";
                     String msg = ResourceLocator.getInstance()
                             .getMessageResources().getMessage(locale,
                                     messageKey);
@@ -133,37 +133,37 @@ public class TypeOfTestStatusUpdateAction extends BaseAction {
         // initialize the form
         dynaForm.initialize(mapping);
         // repopulate the form from valueholder
-        PropertyUtils.copyProperties(dynaForm, typeOfResultStatus);
+        PropertyUtils.copyProperties(dynaForm, typeOfTestStatus);
 
         if ("true".equalsIgnoreCase(request.getParameter("close"))) {
             forward = FWD_CLOSE;
         }
 
-        if (typeOfResultStatus.getId() != null && !typeOfResultStatus.getId().equals("0")) {
-            request.setAttribute(ID, typeOfResultStatus.getId());
+        if (typeOfTestStatus.getId() != null && !typeOfTestStatus.getId().equals("0")) {
+            request.setAttribute(ID, typeOfTestStatus.getId());
 
         }
 
         //bugzilla 1400
         if (isNew) forward = FWD_SUCCESS_INSERT;
         //bugzilla 1467 added direction for redirect to NextPreviousAction
-        return getForward(mapping.findForward(forward), typeOfResultStatus.getId(), start, direction);
+        return getForward(mapping.findForward(forward), typeOfTestStatus.getId(), start, direction);
 
     }
 
     protected String getPageTitleKey() {
         if (isNew) {
-            return "typeofresultstatus.add.title";
+            return "typeofteststatus.add.title ";
         } else {
-            return "typeofresultstatus.edit.title";
+            return "typeofteststatus.edit.title";
         }
     }
 
     protected String getPageSubtitleKey() {
         if (isNew) {
-            return "typeofresultstatus.add.title";
+            return "typeofteststatus.add.subtitle";
         } else {
-            return "typeofresultstatus.edit.title";
+            return "typeofteststatus.edit.subtitle";
         }
     }
 }
