@@ -204,11 +204,11 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		return getTotalCount("TypeOfTestStatus", TypeOfTestStatus.class);
 	}
 
-	public List getNextRecord(String id, String table, Class clazz) throws LIMSRuntimeException {
+	public List getNextRecord(String name, String table, Class clazz) throws LIMSRuntimeException {
 
 		List list = new Vector();
 		try {
-			String sql = "from " + table + " t where id > " + enquote(id) + " order by t.statusName";
+			String sql = "from " + table + " t where status_name > " + enquote(name) + " order by t.statusName";
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setFirstResult(1);
 			query.setMaxResults(2);
@@ -223,11 +223,11 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 		return list;
 	}
 
-	public List getPreviousRecord(String id, String table, Class clazz) throws LIMSRuntimeException {
+	public List getPreviousRecord(String name, String table, Class clazz) throws LIMSRuntimeException {
 
 		List list = new Vector();
 		try {
-			String sql = "from " + table + " t order by t.id desc where id < " + enquote(id);
+			String sql = "from " + table + " t order by t.statusName desc where status_name < " + enquote(name);
 			org.hibernate.Query query = HibernateUtil.getSession().createQuery(sql);
 			query.setFirstResult(1);
 			query.setMaxResults(2);

@@ -44,9 +44,13 @@
 		</td>
 		<td>
 			<html:select name="<%=formName%>" property="statusType">
-				<option value='NONE'> <bean:message key="test.status.select" /> </option>
-				<option value="SAMPLE">SAMPLE</option>
-				<option value="TEST">TEST</option>
+				<logic:iterate name="allowedStatusTypes" id="allowedStatusType" type="java.lang.String">
+					<html:option value='<%=allowedStatusType%>'>
+						<bean:write name="allowedStatusType"/>
+					</html:option>
+				</logic:iterate>
+
+
 				</select>
 
 			</html:select>

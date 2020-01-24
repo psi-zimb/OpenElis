@@ -28,6 +28,7 @@ import org.apache.struts.action.DynaActionForm;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import us.mn.state.health.lims.common.action.BaseAction;
+import us.mn.state.health.lims.typeofteststatus.valueholder.AllowedTestStatusTypes;
 import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
 import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
 import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
@@ -73,13 +74,13 @@ public class TypeOfTestStatusAction extends BaseAction {
 			
 			// do we need to enable next or previous?
 			//bugzilla 1427 pass in desc not id
-			List typeOfTestStatuses = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getId());
+			List typeOfTestStatuses = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getStatusName());
 			if (typeOfTestStatuses.size() > 0) {
 				// enable next button
 				request.setAttribute(NEXT_DISABLED, "false");
 			}
 			//bugzilla 1427 pass in desc not id
-			typeOfTestStatuses = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getId());
+			typeOfTestStatuses = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getStatusName());
 			if (typeOfTestStatuses.size() > 0) {
 				// enable next button
 				request.setAttribute(PREVIOUS_DISABLED, "false");
@@ -99,6 +100,8 @@ public class TypeOfTestStatusAction extends BaseAction {
 
 		// populate form from valueholder
 		PropertyUtils.copyProperties(form, typeOfTestStatus);
+		request.setAttribute("allowedStatusTypes", AllowedTestStatusTypes.getAllAllowedTestStatusTypes());
+
 		System.out.println("I am in typeOfTestStatusAction this is forward " + forward);
 		return mapping.findForward(forward);
 	}

@@ -2225,7 +2225,7 @@
                 </var>
              </field>
             <field property="description" depends="required,maxlength">
-              <arg0 key="typeofteststatus.description" />F
+              <arg0 key="typeofteststatus.description" />
               <arg1 name="maxlength" key="${var:maxlength}" resource="false"/>
                 <var>
                     <var-name>maxlength</var-name>
@@ -2237,12 +2237,24 @@
             </field>
              <field property="isActive" depends="required">
                  <arg0 key="typeofteststatus.isActive" />
+                 <var>
+                     <var-name>mask</var-name>
+                     <var-value>${yesORno}</var-value>
+                 </var>
              </field>
              <field property="isResultRequired" depends="required">
                  <arg0 key="typeofteststatus.isResultRequired" />
+                 <var>
+                     <var-name>mask</var-name>
+                     <var-value>${yesORno}</var-value>
+                 </var>
              </field>
              <field property="isApprovalRequired" depends="required">
                  <arg0 key="typeofteststatus.isApprovalRequired" />
+                 <var>
+                     <var-name>mask</var-name>
+                     <var-value>${yesORno}</var-value>
+                 </var>
              </field>
           </form>
 

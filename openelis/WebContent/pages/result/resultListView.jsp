@@ -485,7 +485,7 @@
 		var totsSelected = document.getElementById("testStatusId_" + index).value;
 		if(totsSelected > 0) {
 			var isResRequired = document.getElementById("tots_" + totsSelected).value;
-			if(isResRequired == "false") {
+			if(isResRequired == "N") {
 				clearOutResultSection(index);
 				document.getElementById("resultsSection_"+index).className="resultSectionDisableStyle";
 			}
@@ -869,7 +869,7 @@
 								<option value='<%=optionValue.getId()%>'
 										<%if (testResult.getTypeOfTestStatus() != null && optionValue.getId().equals(testResult.getTypeOfTestStatusId()))
 											out.print("selected='selected'");%>>
-									<%=optionValue.getName()%>
+									<%=optionValue.getStatusName()%>
 								</option>
 							</logic:iterate>
 						</select>

@@ -68,7 +68,7 @@ public class TypeOfTestStatusNextPreviousAction extends BaseAction {
 
             if (FWD_NEXT.equals(direction)) {
                 //bugzilla 1427 pass in name not id
-                List typeOfTestStatuses = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getId());
+                List typeOfTestStatuses = typeOfTestStatusDAO.getNextTypeOfTestStatusRecord(typeOfTestStatus.getStatusName());
                 if (typeOfTestStatuses != null && typeOfTestStatuses.size() > 0) {
                     typeOfTestStatus = (TypeOfTestStatus) typeOfTestStatuses.get(0);
                     typeOfTestStatusDAO.getData(typeOfTestStatus);
@@ -85,7 +85,7 @@ public class TypeOfTestStatusNextPreviousAction extends BaseAction {
 
             if (FWD_PREVIOUS.equals(direction)) {
                 //bugzilla 1427 pass in name not id
-                List typeOfResultStatuses = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getId());
+                List typeOfResultStatuses = typeOfTestStatusDAO.getPreviousTypeOfTestStatusRecord(typeOfTestStatus.getStatusName());
                 if (typeOfResultStatuses != null && typeOfResultStatuses.size() > 0) {
                     typeOfTestStatus = (TypeOfTestStatus) typeOfResultStatuses.get(0);
                     typeOfTestStatusDAO.getData(typeOfTestStatus);
