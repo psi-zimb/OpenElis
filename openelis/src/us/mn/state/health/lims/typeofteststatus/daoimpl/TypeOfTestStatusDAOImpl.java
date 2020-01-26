@@ -260,7 +260,7 @@ public class TypeOfTestStatusDAOImpl extends BaseDAOImpl implements TypeOfTestSt
 			}
 			List list = query.list();
 			TypeOfTestStatus duplicateEntry = list.isEmpty() ? null : (TypeOfTestStatus) list.get(0);
-			if(duplicateEntry.getId().equals(typeOfTestStatusId)) {
+			if(duplicateEntry != null && duplicateEntry.getId().equals(typeOfTestStatusId)) {
 				return false;
 			}
 			return list.size() > 0;

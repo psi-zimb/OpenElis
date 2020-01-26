@@ -28,6 +28,7 @@ import us.mn.state.health.lims.typeoftestresult.daoimpl.TypeOfTestResultDAOImpl;
 import us.mn.state.health.lims.typeoftestresult.valueholder.TypeOfTestResult;
 import us.mn.state.health.lims.typeofteststatus.dao.TypeOfTestStatusDAO;
 import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
+import us.mn.state.health.lims.typeofteststatus.valueholder.AllowedTestStatusTypes;
 import us.mn.state.health.lims.typeofteststatus.valueholder.TypeOfTestStatus;
 
 import javax.servlet.http.HttpServletRequest;
@@ -127,6 +128,7 @@ public class TypeOfTestStatusUpdateAction extends BaseAction {
             request.setAttribute(NEXT_DISABLED, "true");
             forward = FWD_FAIL;
         }
+        request.setAttribute("allowedStatusTypes", AllowedTestStatusTypes.getAllAllowedTestStatusTypes());
         if (forward.equals(FWD_FAIL))
             return mapping.findForward(forward);
 
