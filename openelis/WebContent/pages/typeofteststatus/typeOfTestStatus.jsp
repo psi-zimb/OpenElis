@@ -43,7 +43,7 @@
 			<bean:message key="typeofteststatus.statusType"/>:<span class="requiredlabel">*</span>
 		</td>
 		<td>
-			<html:select name="<%=formName%>" property="statusType">
+			<html:select name="<%=formName%>" property="statusType" style="width: 150px;">
 				<logic:iterate name="allowedStatusTypes" id="allowedStatusType" type="java.lang.String">
 					<html:option value='<%=allowedStatusType%>'>
 						<bean:write name="allowedStatusType"/>
@@ -96,10 +96,10 @@
 		<td>
 			<html:radio name='<%= formName %>'
 						property="isResultRequired"
-						value="Y" ><label for="yes"><bean:message key="label.button.yes"/></label></html:radio>
+						value="Y" ><bean:message key="label.button.yes"/></html:radio>
 			<html:radio name='<%= formName %>'
 						property="isResultRequired"
-						value="N" ><label for="no"><bean:message key="label.button.no"/></label></html:radio>
+						value="N" ><bean:message key="label.button.no"/></html:radio>
 		</td>
 	</tr>
 
@@ -110,10 +110,10 @@
 		<td>
 			<html:radio name='<%= formName %>'
 						property="isApprovalRequired"
-						value="Y" ><label for="yes"><bean:message key="label.button.yes"/></label></html:radio>
+						value="Y" ><bean:message key="label.button.yes"/></html:radio>
 			<html:radio name='<%= formName %>'
 						property="isApprovalRequired"
-						value="N" ><label for="no"><bean:message key="label.button.no"/></label></html:radio>
+						value="N" ><bean:message key="label.button.no"/></html:radio>
 		</td>
 	</tr>
 

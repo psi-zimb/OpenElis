@@ -134,9 +134,6 @@ public class ResultsValidation {
 					errors.add(new ActionError("error.requiredNote.missing"));
 				}
 			}
-			if(item.isTestStatusModified()) {
-				errors.add(new ActionError("error.test.status.requiredNote.missing"));
-			}
 		}
 	}
 	private void validateTesterSignature(TestResultItem item, List<ActionError> errors) {
