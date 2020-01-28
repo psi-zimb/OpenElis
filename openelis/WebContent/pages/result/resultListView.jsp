@@ -63,6 +63,7 @@
 	boolean noteRequired = false;
 	boolean autofillTechBox = false;
 
+
 %>
 <%
 	hivKits = new ArrayList<String>();
@@ -74,6 +75,10 @@
 		}else{
 			syphilisKits.add( item.getInventoryLocationId());
 		}
+	}
+
+	for( TestResultItem trItem : ((List<TestResultItem>)tests) ){
+
 	}
 
 	String path = request.getContextPath();
@@ -169,7 +174,7 @@
 		$jq("select[class=testStatus]").each(
 				function(){
 					var index = this.id.slice(this.id.length-1,this.id.length);
-					enableDisableResult(index);
+					enableDisableResult(index, this);
 				}
 		);
 
@@ -282,7 +287,9 @@
 	}
 
 	function /*void*/ handleReferralCheckChange(checkbox){
+
 		var testResult = $(checkbox).up('.testResult');
+
 		var referralReason = $(testResult).down('.referralReason');
 		referralReason.value = (referralReason.value != "0") ? referralReason.value : 0;
 		var isTestReferredOut = checkbox.checked;
@@ -442,55 +449,75 @@
 
 	}
 
-	function clearOutResultSection(index) {
-		if(document.getElementById("results_"+index)) {
-			document.getElementById("results_"+index).value="";
-			document.getElementById("results_"+index).disabled="true";
-		}
-		if(document.getElementById("qualifiedDict_"+index)) {
-			document.getElementById("qualifiedDict_" + index).value = "";
-			document.getElementById("qualifiedDict_"+index).disabled="true";
-		}
-		if(document.getElementById("log_"+index)) {
-			document.getElementById("log_"+index).value="";
-			document.getElementById("log_"+index).disabled="true";
-		}
-		if(document.getElementById("abnormalId_"+index)) {
-			document.getElementById("abnormalId_"+index).checked=false;
-			document.getElementById("abnormalId_"+index).disabled="true";
-		}
-		if(document.getElementById("referralId_"+index)) {
-			document.getElementById("referralId_"+index).checked=false;
-			document.getElementById("referralId_"+index).disabled="true";
+	function clearOutResultSection(index, disabled) {
+		if($("results_" + index)) {
+			$("results_" + index).disabled = disabled;
+			if(disabled) {
+				$("results_" + index).value="";
+			}
 		}
 
-		if(document.getElementById("referralReasonId_"+index)) {
-			var elementsR = document.getElementById("referralReasonId_"+index).options;
-			for(var i = 0; i < elementsR.length; i++){
-				elementsR[i].selected = false;
+		if($("qualifiedDict_" + index)) {
+			$("qualifiedDict_" + index).disabled = disabled;
+			if(disabled) {
+				$("qualifiedDict_" + index).value="";
 			}
-			document.getElementById("referralReasonId_"+index).disabled="true";
 		}
 
-		if(document.getElementById("referralOrganizationId_"+index)) {
-			var elementsO = document.getElementById("referralOrganizationId_"+index).options;
-			for(var i = 0; i < elementsO.length; i++){
-				elementsO[i].selected = false;
+		if($("log_" + index)) {
+			$("log_" + index).disabled = disabled;
+			if(disabled) {
+				$("log_" + index).value="";
 			}
-			document.getElementById("referralOrganizationId_"+index).disabled="true";
+		}
+
+		if($("abnormalId_" + index)) {
+			$("abnormalId_" + index).disabled = disabled;
+			if(disabled) {
+				$("abnormalId_" + index).checked=false;
+			}
+		}
+
+		if($("referralId_" + index)) {
+			$("referralId_" + index).disabled = disabled;
+			if(disabled) {
+				$("abnormalId_" + index).checked=false;
+			}
+		}
+
+
+		if($("referralReasonId_" + index)) {
+			$("referralReasonId_" + index).disabled=disabled;
+			if(disabled) {
+				var elementsR = $("referralReasonId_" + index).options;
+				for (var i = 0; i < elementsR.length; i++) {
+					elementsR[i].selected = false;
+				}
+			}
+		}
+
+		if($("referralOrganizationId_" + index)) {
+			$("referralOrganizationId_" + index).disabled=disabled;
+			if(disabled) {
+				var elementsO = $("referralOrganizationId_" + index).options;
+				for (var i = 0; i < elementsO.length; i++) {
+					elementsO[i].selected = false;
+				}
+			}
 		}
 	}
 
 	function enableDisableResult(index) {
-		var totsSelected = document.getElementById("testStatusId_" + index).value;
+		var totsSelected = $("testStatusId_" + index).value;
 		if(totsSelected > 0) {
-			var isResRequired = document.getElementById("tots_" + totsSelected).value;
+			var isResRequired = $("tots_" + totsSelected).value;
 			if(isResRequired == "N") {
-				clearOutResultSection(index);
-				document.getElementById("resultsSection_"+index).className="resultSectionDisableStyle";
+				clearOutResultSection(index, true);
+				$("resultsSection_" + index).className="resultSectionDisableStyle";
 			}
 		} else {
-			document.getElementById("resultsSection_"+index).className="";
+			clearOutResultSection(index, false);
+			$("resultsSection_" + index).className="";
 		}
 	}
 
@@ -857,9 +884,10 @@
 						<select
 								name="<%="testResult[" + index + "].typeOfTestStatusId"%>"
 								id='<%="testStatusId_" + index%>' class="testStatus"
-								onchange='<%="enableDisableResult(" + index + " );" +
-				"markUpdated(" + index + "); " +
-				(noteRequired  ? "showStatusNote( " + index + ");" : ""  ) %>'>
+								onchange='<%= "markUpdated(" + index + ");" +
+									"enableDisableResult(" + index + ", this );" +
+									(noteRequired && (!"".equals(testResult.getResultValue()) || !GenericValidator.isBlankOrNull(testResult.getMultiSelectResultValues())) ? "showNote( " + index + ");" : "showStatusNote( " + index + ");"  )
+								 %>'>
 							<option value='0'>
 								<bean:message key="test.status.select" />
 							</option>
