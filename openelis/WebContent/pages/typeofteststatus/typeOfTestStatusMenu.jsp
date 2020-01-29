@@ -48,10 +48,10 @@
      
    	   </td>
    	    
-	   <td class="textcontent">
+	   <td class="textcontent" style="max-width: 100%;word-break: break-word;">
 	   	  <bean:write name="tors" property="statusName"/>
 	   </td>
-	   <td class="textcontent">
+	   <td class="textcontent" style="max-width: 100%;word-break: break-word;">
 	   	  <bean:write name="tors" property="description"/>
 	   </td>
 	   <td class="textcontent">
