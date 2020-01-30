@@ -77,9 +77,7 @@
 		}
 	}
 
-	for( TestResultItem trItem : ((List<TestResultItem>)tests) ){
 
-	}
 
 	String path = request.getContextPath();
 	basePath = path + "/";
@@ -174,7 +172,7 @@
 		$jq("select[class=testStatus]").each(
 				function(){
 					var index = this.id.slice(this.id.length-1,this.id.length);
-					enableDisableResult(index, this);
+					doTestStatusResultChange(index, false);
 				}
 		);
 
@@ -388,6 +386,7 @@
 		var form = window.document.forms[0];
 		form.enctype = "multipart/form-data";
 		form.action = '<%=formName%>'.sub('Form','') + "Update.do?referer=" + '<%= referer %>'  + '<%= logbookType == "" ? "" : "&type=" + logbookType  %>';
+		enableTestStatusResultFields();
 		form.submit();
 	}
 
@@ -448,77 +447,83 @@
 		}
 
 	}
+	var disabledFields = [];
+	var disabledFieldCount = 0;
+	function clearAndTriggerOnchange($element, triggerResOnChange, index) {
 
-	function clearOutResultSection(index, disabled) {
-		if($("results_" + index)) {
-			$("results_" + index).disabled = disabled;
-			if(disabled) {
-				$("results_" + index).value="";
-			}
-		}
-
-		if($("qualifiedDict_" + index)) {
-			$("qualifiedDict_" + index).disabled = disabled;
-			if(disabled) {
-				$("qualifiedDict_" + index).value="";
-			}
-		}
-
-		if($("log_" + index)) {
-			$("log_" + index).disabled = disabled;
-			if(disabled) {
-				$("log_" + index).value="";
-			}
-		}
-
-		if($("abnormalId_" + index)) {
-			$("abnormalId_" + index).disabled = disabled;
-			if(disabled) {
-				$("abnormalId_" + index).checked=false;
-			}
-		}
-
-		if($("referralId_" + index)) {
-			$("referralId_" + index).disabled = disabled;
-			if(disabled) {
-				$("abnormalId_" + index).checked=false;
-			}
-		}
-
-
-		if($("referralReasonId_" + index)) {
-			$("referralReasonId_" + index).disabled=disabled;
-			if(disabled) {
-				var elementsR = $("referralReasonId_" + index).options;
-				for (var i = 0; i < elementsR.length; i++) {
-					elementsR[i].selected = false;
+		if($element) {
+			var originalValue = $element.value;
+			if(!(originalValue == "" || originalValue == 0 || originalValue==false) && triggerResOnChange) {
+				if($element.type=="checkbox") {
+					$element.checked=false;
+				} else if($element.type=="select-one" || $element.type=="select-multiple") {
+					var elementsR = $element.options;
+					for (var i = 0; i < elementsR.length; i++) {
+						elementsR[i].selected = false;
+					}
+					$element.value=0;
+				} else {
+					$element.value='';
 				}
-			}
-		}
 
-		if($("referralOrganizationId_" + index)) {
-			$("referralOrganizationId_" + index).disabled=disabled;
-			if(disabled) {
-				var elementsO = $("referralOrganizationId_" + index).options;
-				for (var i = 0; i < elementsO.length; i++) {
-					elementsO[i].selected = false;
-				}
+				$element.dispatchEvent(new Event('change'));
+			} else if(triggerResOnChange) {
+				markUpdated(index);
+				showStatusNote(index);
+			}
+			if(!$element.disabled) {
+				jQuery($element).attr("disabled", "disabled");
+				disabledFields[disabledFieldCount++] = $element;
 			}
 		}
 	}
 
-	function enableDisableResult(index) {
+	function clearOutResultSection(index, disabled, triggerResOnChange) {
+		if(disabled) {
+			clearAndTriggerOnchange($("results_" + index), triggerResOnChange, index);
+			clearAndTriggerOnchange($("abnormalId_" + index), triggerResOnChange, index);
+			clearAndTriggerOnchange($("referralId_" + index), triggerResOnChange, index);
+			clearAndTriggerOnchange($("referralReasonId_" + index), triggerResOnChange, index);
+			clearAndTriggerOnchange($("referralOrganizationId_" + index), triggerResOnChange, index);
+		} else {
+			if(disabledFields.contains($("results_" + index))) {
+				jQuery($("results_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("abnormalId_" + index))) {
+				jQuery($("abnormalId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralId_" + index))) {
+				jQuery($("referralId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralReasonId_" + index))) {
+				jQuery($("referralReasonId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralOrganizationId_" + index))) {
+				jQuery($("referralOrganizationId_" + index)).removeAttr("disabled");
+			}
+		}
+	}
+
+	function doTestStatusResultChange(index, triggerResOnChange) {
 		var totsSelected = $("testStatusId_" + index).value;
 		if(totsSelected > 0) {
 			var isResRequired = $("tots_" + totsSelected).value;
 			if(isResRequired == "N") {
-				clearOutResultSection(index, true);
+				clearOutResultSection(index, true, triggerResOnChange);
 				$("resultsSection_" + index).className="resultSectionDisableStyle";
 			}
 		} else {
-			clearOutResultSection(index, false);
+			clearOutResultSection(index, false, triggerResOnChange);
 			$("resultsSection_" + index).className="";
 		}
+	}
+
+	function enableTestStatusResultFields() {
+		 if(disabledFields && disabledFields != null && disabledFields.length > 0) {
+		 	for (var i = 0; i < disabledFields.length; i++) {
+				jQuery(disabledFields[i]).removeAttr("disabled");
+			 }
+		 }
 	}
 
 
@@ -884,10 +889,7 @@
 						<select
 								name="<%="testResult[" + index + "].typeOfTestStatusId"%>"
 								id='<%="testStatusId_" + index%>' class="testStatus"
-								onchange='<%= "markUpdated(" + index + ");" +
-									"enableDisableResult(" + index + ", this );" +
-									(noteRequired && (!"".equals(testResult.getResultValue()) || !GenericValidator.isBlankOrNull(testResult.getMultiSelectResultValues())) ? "showNote( " + index + ");" : "showStatusNote( " + index + ");"  )
-								 %>'>
+								onchange='<%= "doTestStatusResultChange(" + index + ", true );"  %>'>
 							<option value='0'>
 								<bean:message key="test.status.select" />
 							</option>
@@ -902,7 +904,7 @@
 							</logic:iterate>
 						</select>
 
-					</td>
+					</td>/
 
 
 					<!-- result cell -->
@@ -920,7 +922,7 @@
 												   class="testResultValue"
 												   style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 												   title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
-													<%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTotsResultRequired() ? "disabled='disabled'" : ""%>
+													<%= testResult.isReadOnly() || testResult.isReferredOut()  ? "disabled='disabled'" : ""%>
 												   class='<%= (testResult.isReflexGroup() ? "reflexGroup_" + testResult.getReflexParentGroup()  : "")  +  (testResult.isChildReflex() ? " childReflex_" + testResult.getReflexParentGroup() : "") %> '
 												   onchange='<%="validateResults( this," + index + "," + lowerBound + "," + upperBound + "," + lowerAbnormalBound + "," + upperAbnormalBound + ", \"XXXX\" );" +
 						               "markUpdated(" + index + "); " +
@@ -935,7 +937,7 @@
 												  indexed="true"
 												  property="resultValue"
 												  size="20"
-												  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTotsResultRequired() %>'
+												  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() %>'
 												  style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 												  title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
 												  styleId='<%="results_" + index %>'
@@ -949,7 +951,7 @@
 													  indexed="true"
 													  property="resultValue"
 													  rows="2"
-													  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut() || !testResult.isTotsResultRequired() %>'
+													  disabled='<%= testResult.isReadOnly() || testResult.isReferredOut()  %>'
 													  style='<%="background: " + (testResult.isValid() ? testResult.isNormal() ? "#ffffff" : "#ffffa0" : "#ffa0a0") %>'
 													  title='<%= (testResult.isValid() ? testResult.isNormal() ? "" : StringUtil.getMessageForKey("result.value.abnormal") : StringUtil.getMessageForKey("result.value.invalid")) %>'
 													  styleId='<%="results_" + index %>'
