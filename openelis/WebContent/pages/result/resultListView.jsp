@@ -454,7 +454,7 @@
 		if($element) {
 			//console.log($element.value);
 			var originalValue = $element.value;
-			if(!(originalValue == "" || originalValue == 0 || originalValue==false) && triggerResOnChange) {
+			if(!(originalValue == "" || originalValue == 0 || originalValue==false || originalValue == "on") && triggerResOnChange) {
 				if($element.type=="checkbox") {
 					$element.checked=false;
 				} else if($element.type=="select-one" || $element.type=="select-multiple") {
@@ -479,34 +479,30 @@
 	}
 
 	function clearOutResultSection(index, disabled, triggerResOnChange) {
-		//console.log(disabledFields);
-		// remove the attribuet from array so that it is redisabled as required per index
-		if(disabledFields.contains($("results_" + index))) {
-			jQuery($("results_" + index)).removeAttr("disabled");
-			disabledFields.splice(disabledFields.indexOf($("results_" + index)), 1);
-		}
-		if(disabledFields.contains($("abnormalId_" + index))) {
-			jQuery($("abnormalId_" + index)).removeAttr("disabled");
-			disabledFields.splice(disabledFields.indexOf($("abnormalId_" + index)), 1);
-		}
-		if(disabledFields.contains($("referralId_" + index))) {
-			jQuery($("referralId_" + index)).removeAttr("disabled");
-			disabledFields.splice(disabledFields.indexOf($("referralId_" + index)), 1);
-		}
-		if(disabledFields.contains($("referralReasonId_" + index))) {
-			jQuery($("referralReasonId_" + index)).removeAttr("disabled");
-			disabledFields.splice(disabledFields.indexOf($("referralReasonId_" + index)), 1);
-		}
-		if(disabledFields.contains($("referralOrganizationId_" + index))) {
-			jQuery($("referralOrganizationId_" + index)).removeAttr("disabled");
-			disabledFields.splice(disabledFields.indexOf($("referralOrganizationId_" + index)), 1);
-		}
+		//console.log("Index : " + index + " Disabled " + disabled)
 		if(disabled) {
 			clearAndTriggerOnchange($("results_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("abnormalId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralReasonId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralOrganizationId_" + index), triggerResOnChange, index);
+		} else {
+			//console.log(disabledFields);
+			if(disabledFields.contains($("results_" + index))) {
+				jQuery($("results_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("abnormalId_" + index))) {
+				jQuery($("abnormalId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralId_" + index))) {
+				jQuery($("referralId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralReasonId_" + index))) {
+				jQuery($("referralReasonId_" + index)).removeAttr("disabled");
+			}
+			if(disabledFields.contains($("referralOrganizationId_" + index))) {
+				jQuery($("referralOrganizationId_" + index)).removeAttr("disabled");
+			}
 		}
 	}
 
@@ -518,28 +514,29 @@
 			if( totsSelected > 0 && $("tots_" + totsSelected).value == "N") {
 				performClearOut = "Y";
 			}
-
+			//console.log("performClearOut: " + performClearOut +" ,index: " + index);
 			if(performClearOut == "N") {
 				clearOutResultSection(index, false, triggerResOnChange);
-				$("resultsSection_" + index).className="";
 			} else {
 				clearOutResultSection(index, true, triggerResOnChange);
-				$("resultsSection_" + index).className="resultSectionDisableStyle";
 			}
 
 			if(triggerResOnChange) {
 				showStatusNote(index);
+				$("resultsSection_" + index).className="resultSectionDisableStyle";
+			} else {
+				$("resultsSection_" + index).className="";
 			}
 		}
 
 	}
 
 	function enableTestStatusResultFields() {
-		 if(disabledFields && disabledFields != null && disabledFields.length > 0) {
-		 	for (var i = 0; i < disabledFields.length; i++) {
+		if(disabledFields && disabledFields != null && disabledFields.length > 0) {
+			for (var i = 0; i < disabledFields.length; i++) {
 				jQuery(disabledFields[i]).removeAttr("disabled");
-			 }
-		 }
+			}
+		}
 	}
 
 
@@ -721,8 +718,8 @@
 					   property="typeofteststatuses" type="TypeOfTestStatus">
 			<input type="hidden"
 				   id='<%="tots_" + optionValue.getId()%>'
-			name="optionValue"
-			value="<%=optionValue.getIsResultRequired()%>" indexed="true" />
+				   name="optionValue"
+				   value="<%=optionValue.getIsResultRequired()%>" indexed="true" />
 		</logic:iterate>
 
 		<logic:iterate id="testResult" name="<%=formName%>"  property="testResult" indexId="index" type="TestResultItem">
@@ -905,6 +902,7 @@
 						<select
 								name="<%="testResult[" + index + "].typeOfTestStatusId"%>"
 								id='<%="testStatusId_" + index%>' class="testStatus"
+								<%=testResult.isReferredOut() ? "disabled=\'true\'" : "" %>
 								onchange='<%= "markUpdated("+index+");doTestStatusResultChange(" + index + ", true );"  %>'>
 							<option value='0'>
 								<bean:message key="test.status.select" />
