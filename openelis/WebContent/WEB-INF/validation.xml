@@ -2225,7 +2225,7 @@
                 </var>
                 <var>
                     <var-name>mask</var-name>
-                    <var-value>^[A-Za-z ]*$</var-value>
+                    <var-value>^[A-Za-z]+(?: +[A-Za-z]+)*$</var-value>
                 </var>
              </field>
             <field property="description" depends="required,maxlength">
