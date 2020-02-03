@@ -469,8 +469,9 @@
 
 				$element.dispatchEvent(new Event('change'));
 			}
-			if(!$element.disabled) {
-				//console.log("disabling Field"+ $element);
+
+			if(!$element.disabled && !disabledFields.contains($element)) {
+				//console.log("disabling Field" + $element);
 				jQuery($element).attr("disabled", "disabled");
 				disabledFields[disabledFieldCount++] = $element;
 			}
@@ -478,50 +479,59 @@
 	}
 
 	function clearOutResultSection(index, disabled, triggerResOnChange) {
+		//console.log(disabledFields);
+		// remove the attribuet from array so that it is redisabled as required per index
+		if(disabledFields.contains($("results_" + index))) {
+			jQuery($("results_" + index)).removeAttr("disabled");
+			disabledFields.splice(disabledFields.indexOf($("results_" + index)), 1);
+		}
+		if(disabledFields.contains($("abnormalId_" + index))) {
+			jQuery($("abnormalId_" + index)).removeAttr("disabled");
+			disabledFields.splice(disabledFields.indexOf($("abnormalId_" + index)), 1);
+		}
+		if(disabledFields.contains($("referralId_" + index))) {
+			jQuery($("referralId_" + index)).removeAttr("disabled");
+			disabledFields.splice(disabledFields.indexOf($("referralId_" + index)), 1);
+		}
+		if(disabledFields.contains($("referralReasonId_" + index))) {
+			jQuery($("referralReasonId_" + index)).removeAttr("disabled");
+			disabledFields.splice(disabledFields.indexOf($("referralReasonId_" + index)), 1);
+		}
+		if(disabledFields.contains($("referralOrganizationId_" + index))) {
+			jQuery($("referralOrganizationId_" + index)).removeAttr("disabled");
+			disabledFields.splice(disabledFields.indexOf($("referralOrganizationId_" + index)), 1);
+		}
 		if(disabled) {
 			clearAndTriggerOnchange($("results_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("abnormalId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralReasonId_" + index), triggerResOnChange, index);
 			clearAndTriggerOnchange($("referralOrganizationId_" + index), triggerResOnChange, index);
-		} else {
-			if(disabledFields.contains($("results_" + index))) {
-				jQuery($("results_" + index)).removeAttr("disabled");
-			}
-			if(disabledFields.contains($("abnormalId_" + index))) {
-				jQuery($("abnormalId_" + index)).removeAttr("disabled");
-			}
-			if(disabledFields.contains($("referralId_" + index))) {
-				jQuery($("referralId_" + index)).removeAttr("disabled");
-			}
-			if(disabledFields.contains($("referralReasonId_" + index))) {
-				jQuery($("referralReasonId_" + index)).removeAttr("disabled");
-			}
-			if(disabledFields.contains($("referralOrganizationId_" + index))) {
-				jQuery($("referralOrganizationId_" + index)).removeAttr("disabled");
-			}
 		}
 	}
 
 	function doTestStatusResultChange(index, triggerResOnChange) {
 		var performClearOut = "N";
-		var totsSelected = $("testStatusId_" + index).value;
-		// If valid type of test status selected and result required is N only then clear out the result section
-		if( totsSelected > 0 && $("tots_" + totsSelected).value == "N") {
-			performClearOut = "Y";
+		if($("testStatusId_" + index)) {
+			var totsSelected = $("testStatusId_" + index).value;
+			// If valid type of test status selected and result required is N only then clear out the result section
+			if( totsSelected > 0 && $("tots_" + totsSelected).value == "N") {
+				performClearOut = "Y";
+			}
+
+			if(performClearOut == "N") {
+				clearOutResultSection(index, false, triggerResOnChange);
+				$("resultsSection_" + index).className="";
+			} else {
+				clearOutResultSection(index, true, triggerResOnChange);
+				$("resultsSection_" + index).className="resultSectionDisableStyle";
+			}
+
+			if(triggerResOnChange) {
+				showStatusNote(index);
+			}
 		}
 
-		if(performClearOut == "N") {
-			clearOutResultSection(index, false, triggerResOnChange);
-			$("resultsSection_" + index).className="";
-		} else {
-			clearOutResultSection(index, true, triggerResOnChange);
-			$("resultsSection_" + index).className="resultSectionDisableStyle";
-		}
-
-		if(triggerResOnChange) {
-			showStatusNote(index);
-		}
 	}
 
 	function enableTestStatusResultFields() {
