@@ -452,6 +452,7 @@
 	function clearAndTriggerOnchange($element, triggerResOnChange, index) {
 
 		if($element) {
+			//console.log($element.value);
 			var originalValue = $element.value;
 			if(!(originalValue == "" || originalValue == 0 || originalValue==false) && triggerResOnChange) {
 				if($element.type=="checkbox") {
@@ -467,11 +468,9 @@
 				}
 
 				$element.dispatchEvent(new Event('change'));
-			} else if(triggerResOnChange) {
-				markUpdated(index);
-				showStatusNote(index);
 			}
 			if(!$element.disabled) {
+				//console.log("disabling Field"+ $element);
 				jQuery($element).attr("disabled", "disabled");
 				disabledFields[disabledFieldCount++] = $element;
 			}
@@ -505,16 +504,23 @@
 	}
 
 	function doTestStatusResultChange(index, triggerResOnChange) {
+		var performClearOut = "N";
 		var totsSelected = $("testStatusId_" + index).value;
-		if(totsSelected > 0) {
-			var isResRequired = $("tots_" + totsSelected).value;
-			if(isResRequired == "N") {
-				clearOutResultSection(index, true, triggerResOnChange);
-				$("resultsSection_" + index).className="resultSectionDisableStyle";
-			}
-		} else {
+		// If valid type of test status selected and result required is N only then clear out the result section
+		if( totsSelected > 0 && $("tots_" + totsSelected).value == "N") {
+			performClearOut = "Y";
+		}
+
+		if(performClearOut == "N") {
 			clearOutResultSection(index, false, triggerResOnChange);
 			$("resultsSection_" + index).className="";
+		} else {
+			clearOutResultSection(index, true, triggerResOnChange);
+			$("resultsSection_" + index).className="resultSectionDisableStyle";
+		}
+
+		if(triggerResOnChange) {
+			showStatusNote(index);
 		}
 	}
 
@@ -889,7 +895,7 @@
 						<select
 								name="<%="testResult[" + index + "].typeOfTestStatusId"%>"
 								id='<%="testStatusId_" + index%>' class="testStatus"
-								onchange='<%= "doTestStatusResultChange(" + index + ", true );"  %>'>
+								onchange='<%= "markUpdated("+index+");doTestStatusResultChange(" + index + ", true );"  %>'>
 							<option value='0'>
 								<bean:message key="test.status.select" />
 							</option>
