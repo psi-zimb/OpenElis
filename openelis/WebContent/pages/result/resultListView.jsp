@@ -312,6 +312,11 @@
 			referralOrganization.value = 0;
 			isReferredOutValueChanged.value = true;
 		}
+
+		var testStatus = $(testResult).down('.testStatus');
+		testStatus.style.background = "#ffffff";
+		testStatus.disabled = isTestReferredOut;
+
 	}
 
 	function /*void*/ handleReferralReasonAndInstituteChange(index ){
@@ -517,16 +522,16 @@
 			//console.log("performClearOut: " + performClearOut +" ,index: " + index);
 			if(performClearOut == "N") {
 				clearOutResultSection(index, false, triggerResOnChange);
+				$("resultsSection_" + index).className="";
 			} else {
 				clearOutResultSection(index, true, triggerResOnChange);
+				$("resultsSection_" + index).className="resultSectionDisableStyle";
 			}
 
 			if(triggerResOnChange) {
 				showStatusNote(index);
-				$("resultsSection_" + index).className="resultSectionDisableStyle";
-			} else {
-				$("resultsSection_" + index).className="";
 			}
+
 		}
 
 	}
@@ -918,7 +923,7 @@
 							</logic:iterate>
 						</select>
 
-					</td>/
+					</td>
 
 
 					<!-- result cell -->
