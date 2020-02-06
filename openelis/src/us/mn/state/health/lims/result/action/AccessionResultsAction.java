@@ -93,7 +93,7 @@ public class AccessionResultsAction extends BaseAction {
 		PropertyUtils.setProperty(dynaForm, "referralReasons", ReferralUtil.getReferralReasons());
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
 
-		//TYPE_OF_RESULT_STATUS 		
+		//TYPE_OF_TEST_STATUS 		
 		PropertyUtils.setProperty(dynaForm, "typeofteststatuses", new TypeOfTestStatusDAOImpl().getAllActiveTestStatus());
 		
 

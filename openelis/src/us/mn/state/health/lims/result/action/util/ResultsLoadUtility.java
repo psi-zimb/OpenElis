@@ -852,7 +852,7 @@ public class ResultsLoadUtility {
             }
         }
         
-        //Result status
+        //Test status
         TestStatusDAO trsDAO = new TestStatusDAOImpl();
         TestStatus testStatus = trsDAO.getTestStatusByTestId(test.getId());
 
