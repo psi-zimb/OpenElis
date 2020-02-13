@@ -154,7 +154,7 @@
                 constraintName="unique_ids"
                 schemaName="clinlims"
                 tableName="external_reference"
-                />
+        />
     </changeSet>
 
     <changeSet id="9" author="tw" runOnChange="true" context="bahmni">
@@ -565,32 +565,32 @@
 
     <changeSet author="tw" id="37" context="bahmni">
         <comment>Validation fails if active inventory items dont have receipt. Inactivating the inventory items</comment>
-            <update schemaName="clinlims" tableName="inventory_item">
+        <update schemaName="clinlims" tableName="inventory_item">
             <column name="is_active" value="N"/>
         </update>
     </changeSet>
 
     <changeSet author="tw" id="38" context="bahmni">
         <comment>Remove haiti test section menus for Test Results and Validation</comment>
-            <delete schemaName="clinlims" tableName="menu">
-                <where>element_id like '%menu_resultvalidation%' and element_id != 'menu_resultvalidation_All' and element_id !='menu_resultvalidation'</where>
-            </delete>
-            <delete schemaName="clinlims" tableName="menu">
-                <where>element_id like '%menu_results_%' and element_id !='menu_results_patient' and element_id != 'menu_results_accession' and element_id != 'menu_results_status' and element_id != 'menu_results_search'</where>
-            </delete>
+        <delete schemaName="clinlims" tableName="menu">
+            <where>element_id like '%menu_resultvalidation%' and element_id != 'menu_resultvalidation_All' and element_id !='menu_resultvalidation'</where>
+        </delete>
+        <delete schemaName="clinlims" tableName="menu">
+            <where>element_id like '%menu_results_%' and element_id !='menu_results_patient' and element_id != 'menu_results_accession' and element_id != 'menu_results_status' and element_id != 'menu_results_search'</where>
+        </delete>
     </changeSet>
 
     <changeSet author="tw" id="39" context="bahmni">
         <comment>Removing menus not needed for Bahmni</comment>
-            <delete schemaName="clinlims" tableName="menu">
-                <where>element_id = 'menu_inventory'</where>
-            </delete>
-            <delete schemaName="clinlims" tableName="menu">
-                <where>element_id like '%menu_workplan%'</where>
-            </delete>
-            <delete schemaName="clinlims" tableName="menu">
-                <where>element_id like '%menu_reports_aggregate%'</where>
-            </delete>
+        <delete schemaName="clinlims" tableName="menu">
+            <where>element_id = 'menu_inventory'</where>
+        </delete>
+        <delete schemaName="clinlims" tableName="menu">
+            <where>element_id like '%menu_workplan%'</where>
+        </delete>
+        <delete schemaName="clinlims" tableName="menu">
+            <where>element_id like '%menu_reports_aggregate%'</where>
+        </delete>
     </changeSet>
 
     <changeSet author="tw" id="40" context="bahmni">
@@ -606,11 +606,11 @@
         </insert>
     </changeSet>
 
-     <changeSet author="tw" id="41" context="bahmni">
+    <changeSet author="tw" id="41" context="bahmni">
         <insert schemaName="clinlims" tableName="menu">
             <column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
             <column name="parent_id"
-                valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_reports' ) " />
+                    valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_reports' ) " />
             <column name="presentation_order" valueNumeric="2" />
             <column name="element_id" value="menu_reports_aggregate" />
             <column name="display_key" value="openreports.aggregate.title" />
@@ -619,11 +619,11 @@
         <insert schemaName="clinlims" tableName="menu">
             <column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
             <column name="parent_id"
-                valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_reports_aggregate' ) " />
+                    valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_reports_aggregate' ) " />
             <column name="presentation_order" valueNumeric="2" />
             <column name="element_id" value="menu_reports_aggregate_all" />
             <column name="action_url"
-                value="/Report.do?type=indicator&amp;report=indicatorHaitiClinicalAllTests" />
+                    value="/Report.do?type=indicator&amp;report=indicatorHaitiClinicalAllTests" />
             <column name="display_key" value="openreports.all.tests.aggregate" />
             <column name="tool_tip_key" value="tooltip.openreports.all.tests.aggregate" />
         </insert>
@@ -769,19 +769,19 @@
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
             insert into system_role_module
-                (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
+            (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
             select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
-                from system_role r, system_module m
-                where trim(r.name) = 'LabDashboard' and
-                    m.name = 'LabDashboard'
+            from system_role r, system_module m
+            where trim(r.name) = 'LabDashboard' and
+            m.name = 'LabDashboard'
         </sql>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
             insert into system_role_module
-                (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
+            (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
             select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
-                from system_role r, system_module m
-                where trim(r.name) = 'Upload' and
-                    m.name = 'Upload'
+            from system_role r, system_module m
+            where trim(r.name) = 'Upload' and
+            m.name = 'Upload'
         </sql>
     </changeSet>
     <changeSet id="51" author="tw" context="bahmni">
@@ -798,11 +798,11 @@
         </update>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
             insert into system_role_module
-                (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
+            (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
             select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
-                from system_role r, system_module m
-                where trim(r.name) = 'LabDashboard' and
-                    m.name = 'LabDashboard'
+            from system_role r, system_module m
+            where trim(r.name) = 'LabDashboard' and
+            m.name = 'LabDashboard'
         </sql>
     </changeSet>
     <changeSet id="53" author="tw" context="bahmni">
@@ -818,11 +818,11 @@
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
             insert into system_role_module
-                (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
+            (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
             select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
-                from system_role r, system_module m
-                where trim(r.name) = 'Validation' and
-                    m.name = 'ResultValidation:All Sections'
+            from system_role r, system_module m
+            where trim(r.name) = 'Validation' and
+            m.name = 'ResultValidation:All Sections'
         </sql>
     </changeSet>
     <changeSet id="54" author="tw" context="bahmni">
@@ -834,7 +834,7 @@
             <column name="lastupdated" valueDate=" now() "/>
         </insert>
     </changeSet>
-     <changeSet id="55" author="tw" context="bahmni">
+    <changeSet id="55" author="tw" context="bahmni">
         <update schemaName="clinlims" tableName="menu">
             <column name="presentation_order" value="1"/>
             <where>element_id='menu_results_search'</where>
@@ -846,7 +846,7 @@
         <insert schemaName="clinlims" tableName="menu">
             <column name="id" valueNumeric=" nextval( 'menu_seq' ) " />
             <column name="parent_id"
-                valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_results' ) " />
+                    valueNumeric=" ( select id from clinlims.menu where element_id = 'menu_results' ) " />
             <column name="presentation_order" valueNumeric="2" />
             <column name="element_id" value="menu_results_logbook" />
             <column name="display_key" value="banner.menu.results.logbook" />
@@ -899,11 +899,11 @@
         </insert>
         <sql endDelimiter=";\n" splitStatements="true" stripComments="true">
             insert into system_role_module
-                (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
+            (id, has_select, has_add, has_update, has_delete, system_role_id, system_module_id)
             select nextval( 'system_user_module_seq' ), 'Y', 'Y', 'Y', 'Y', r.id, m.id
-                from system_role r, system_module m
-                where trim(r.name) = 'Intake' and
-                    m.name = 'HealthCenter'
+            from system_role r, system_module m
+            where trim(r.name) = 'Intake' and
+            m.name = 'HealthCenter'
         </sql>
     </changeSet>
 
@@ -1000,16 +1000,16 @@
             <column name="lastupdated" valueDate="now()"/>
         </update>
     </changeSet>
-	<changeSet id="70" author="ict4h" context="bahmni">
-       	<createTable tableName="event_records_offset_marker" schemaName="clinlims">
-	       <column name="id" type="int" autoIncrement="true">
-	           <constraints nullable="false" primaryKey="true"/>
-	       </column>
-	       <column name="event_id" type="int"/>
-	       <column name="event_count" type="int"/>
-	       <column name="category" type="varchar(255)"/>
-	   </createTable>
-	</changeSet>
+    <changeSet id="70" author="ict4h" context="bahmni">
+        <createTable tableName="event_records_offset_marker" schemaName="clinlims">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="event_id" type="int"/>
+            <column name="event_count" type="int"/>
+            <column name="category" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
     <changeSet id="71" author="ict4h" context="bahmni">
         <addColumn tableName="failed_events" schemaName="clinlims">
             <column name="title" type="varchar(255)"></column>
@@ -1115,7 +1115,7 @@
             set system_user_id = su.id
             from system_user su
             where rs.non_user_name = concat(su.first_name, ' ', su.last_name)
-                and rs.system_user_id is null;
+            and rs.system_user_id is null;
         </sql>
     </changeSet>
     <changeSet id="85" author="tw" context="bahmni">
@@ -1128,10 +1128,10 @@
     <changeSet id="86" author="Banka" context="bahmni">
         <comment>Add unique constraint for uuid in patient</comment>
         <addUniqueConstraint
-            columnNames="uuid"
-            schemaName="clinlims"
-            tableName="patient"
-            constraintName="unique_uuid_constraint"/>
+                columnNames="uuid"
+                schemaName="clinlims"
+                tableName="patient"
+                constraintName="unique_uuid_constraint"/>
     </changeSet>
     <changeSet id="87" author="arathy" context="bahmni" runOnChange="true">
         <comment>Adding site information for logo image name</comment>
@@ -1160,16 +1160,16 @@
     <changeSet id="90" author="rohan" context="bahmni" runOnChange="true">
         <comment>Remove duplicate unit of measures</comment>
         <delete schemaName="clinlims" tableName="unit_of_measure">
-                <where>name='/hpf'</where>
+            <where>name='/hpf'</where>
         </delete>
         <delete schemaName="clinlims" tableName="unit_of_measure">
-                <where>name='iU/ml'</where>
+            <where>name='iU/ml'</where>
         </delete>
         <delete schemaName="clinlims" tableName="unit_of_measure">
-                <where>name='u/mm'</where>
+            <where>name='u/mm'</where>
         </delete>
         <delete schemaName="clinlims" tableName="unit_of_measure">
-                <where>name='U/MM'</where>
+            <where>name='U/MM'</where>
         </delete>
     </changeSet>
     <changeSet id="91" author="Neha" context="bahmni">
@@ -1208,14 +1208,14 @@
         </addColumn>
     </changeSet>
     <changeSet id="95" author="Bharti,Arathy" context="bahmni">
-				<preConditions onFail="MARK_RAN">
+        <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="0">
-			                SELECT COUNT(*) FROM gender where gender_type = 'O';
-			      </sqlCheck>
-				</preConditions>
+                SELECT COUNT(*) FROM gender where gender_type = 'O';
+            </sqlCheck>
+        </preConditions>
         <comment>Adding Hospital name and address</comment>
         <sql>
-          		insert into gender (id, gender_type, description, name_key) values ((select nextval('gender_seq')), 'O', 'Other', 'gender.other');
+            insert into gender (id, gender_type, description, name_key) values ((select nextval('gender_seq')), 'O', 'Other', 'gender.other');
         </sql>
     </changeSet>
     <changeSet id="96" author="Bharti, Arathy" context="bahmni">
@@ -1253,7 +1253,7 @@
         <preConditions onFail="CONTINUE">
             <sqlCheck expectedResult="2">
                 select count(*) from quartz_cron_scheduler where name in
-                 ('atom-feed-openmrs-lab', 'atom-feed-openmrs-lab-failed');
+                ('atom-feed-openmrs-lab', 'atom-feed-openmrs-lab-failed');
             </sqlCheck>
         </preConditions>
         <comment>Update cron_statement to correct cron schedule</comment>
@@ -1267,7 +1267,7 @@
         <preConditions onFail="CONTINUE">
             <sqlCheck expectedResult="2">
                 select count(*) from quartz_cron_scheduler where name in
-                 ('atom-feed-referencedata', 'atom-feed-referencedata-failed');
+                ('atom-feed-referencedata', 'atom-feed-referencedata-failed');
             </sqlCheck>
         </preConditions>
         <comment>Delete reference data atom feed scheduler</comment>
@@ -1408,17 +1408,17 @@
             <sqlCheck expectedResult="0">
                 select count(i.relname)
                 from pg_class t,
-                    pg_class i,
-                    pg_index ix,
-                    pg_attribute a
+                pg_class i,
+                pg_index ix,
+                pg_attribute a
                 where
-                    t.oid = ix.indrelid
-                    and i.oid = ix.indexrelid
-                    and a.attrelid = t.oid
-                    and a.attnum = ANY(ix.indkey)
-                    and t.relkind = 'r'
-                    and t.relname = 'event_records'
-                    and i.relname = 'event_records_category_idx'
+                t.oid = ix.indrelid
+                and i.oid = ix.indexrelid
+                and a.attrelid = t.oid
+                and a.attnum = ANY(ix.indkey)
+                and t.relkind = 'r'
+                and t.relname = 'event_records'
+                and i.relname = 'event_records_category_idx'
             </sqlCheck>
         </preConditions>
         <comment>Add index to the category column in event_records table for performance (if it is not already present)</comment>
@@ -1449,12 +1449,12 @@
         </preConditions>
         <comment>Adding new organization External Lab</comment>
         <insert schemaName="clinlims" tableName="referral_reason">
-        <column name="id" valueNumeric=" nextval( 'referral_reason_seq' ) "/>
-        <column name="name" value="Auto Referred Out"/>
-        <column name="description" value="Auto Referred Out"/>
-        <column name="display_key" value="referral.reason.autoReferredOut"/>
-        <column name="lastupdated" valueDate=" now() "/>
-    </insert>
+            <column name="id" valueNumeric=" nextval( 'referral_reason_seq' ) "/>
+            <column name="name" value="Auto Referred Out"/>
+            <column name="description" value="Auto Referred Out"/>
+            <column name="display_key" value="referral.reason.autoReferredOut"/>
+            <column name="lastupdated" valueDate=" now() "/>
+        </insert>
     </changeSet>
 
     <changeSet id="042120160501" author="Hanisha,Shashi" runOnChange="false" context="bahmni">
@@ -1479,10 +1479,10 @@
         </preConditions>
         <comment>Adding new organization External Lab to organization_organization_type</comment>
         <sql>
-        INSERT into organization_organization_type (org_id, org_type_id)
-        SELECT org.id,org_type.id from organization org, organization_type org_type
-        where org.name = 'External Lab' AND
-        org_type.short_name = 'referralLab';
+            INSERT into organization_organization_type (org_id, org_type_id)
+            SELECT org.id,org_type.id from organization org, organization_type org_type
+            where org.name = 'External Lab' AND
+            org_type.short_name = 'referralLab';
         </sql>
     </changeSet>
 
@@ -1490,7 +1490,7 @@
     <changeSet id="2016-01-12-1202" author="Jaswanth, JP" context="bahmni">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="1">
-            SELECT COUNT(*) from site_information where name = 'resultsPageSize'
+                SELECT COUNT(*) from site_information where name = 'resultsPageSize'
             </sqlCheck>
         </preConditions>
         <update schemaName="clinlims" tableName="site_information">
@@ -1554,9 +1554,9 @@
     </changeSet>
     <changeSet id="150320161101" author="Vinay" context="bahmni">
         <preConditions onFail="MARK_RAN">
-        <not>
-            <indexExists indexName="patient_identity_patient_id_idx"/>
-        </not>
+            <not>
+                <indexExists indexName="patient_identity_patient_id_idx"/>
+            </not>
         </preConditions>
         <comment>Add index on patient_id for patient_identity table</comment>
         <createIndex indexName="patient_identity_patient_id_idx"
