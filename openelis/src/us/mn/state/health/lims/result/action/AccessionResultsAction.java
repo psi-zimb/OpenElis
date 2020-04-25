@@ -68,6 +68,7 @@ import us.mn.state.health.lims.userrole.daoimpl.UserRoleDAOImpl;
 import us.mn.state.health.lims.test.valueholder.Test;
 import us.mn.state.health.lims.test.daoimpl.TestDAOImpl;
 import us.mn.state.health.lims.test.dao.TestDAO;
+import us.mn.state.health.lims.typeofteststatus.daoimpl.TypeOfTestStatusDAOImpl;
 
 public class AccessionResultsAction extends BaseAction {
 
@@ -97,6 +98,9 @@ public class AccessionResultsAction extends BaseAction {
 		DynaActionForm dynaForm = (DynaActionForm) form;
 		PropertyUtils.setProperty(dynaForm, "referralReasons", ReferralUtil.getReferralReasons());
 		PropertyUtils.setProperty(dynaForm, "referralOrganizations", OrganizationUtils.getReferralOrganizations());
+
+		//TYPE_OF_TEST_STATUS
+		PropertyUtils.setProperty(dynaForm, "typeofteststatuses", new TypeOfTestStatusDAOImpl().getAllActiveTestStatus());
 
 
 		ResultsPaging paging = new ResultsPaging();

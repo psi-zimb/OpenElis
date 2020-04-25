@@ -103,7 +103,7 @@ public class ResultsValidation {
 	
 	private void validateResult(TestResultItem testResultItem, List<ActionError> errors) {
 
-		if (!(ResultUtil.areNotes(testResultItem) || (supportReferrals && testResultItem.isReferredOut()) || ResultUtil.areResults(testResultItem) || ResultUtil.areFiles(testResultItem))) { // only
+		if (!(ResultUtil.areNotes(testResultItem) || (supportReferrals && testResultItem.isReferredOut()) || ResultUtil.areResults(testResultItem) || ResultUtil.areFiles(testResultItem) || testResultItem.isTestStatusModified())) { // only
 			errors.add(new ActionError("errors.result.required"));
 		}
 
